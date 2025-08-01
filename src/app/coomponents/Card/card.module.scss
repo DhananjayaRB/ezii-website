@@ -1,0 +1,106 @@
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+.default {
+  padding: var(--spacing-xl);
+}
+
+.compact {
+  padding: var(--spacing-lg);
+}
+
+.large {
+  padding: var(--spacing-2xl);
+}
+
+.gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: white;
+  border: none;
+  
+  h3, h4, h5, h6 {
+    color: white;
+  }
+  
+  p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.feature {
+  padding: var(--spacing-xl);
+  text-align: center;
+  
+  .icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    color: white;
+    font-size: var(--font-size-xl);
+  }
+}
+
+.testimonial {
+  padding: var(--spacing-xl);
+  position: relative;
+  
+  .quote {
+    position: absolute;
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+    color: var(--primary);
+    font-size: var(--font-size-2xl);
+    opacity: 0.3;
+  }
+  
+  .content {
+    margin-top: var(--spacing-lg);
+  }
+  
+  .author {
+    margin-top: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+    
+    .info {
+      .name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      
+      .role {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+      }
+    }
+  }
+} 

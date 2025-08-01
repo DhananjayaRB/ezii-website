@@ -1,0 +1,222 @@
+.partnerSection {
+  width: 100%;
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 50%, #e8f0ff 100%);
+  position: relative;
+  overflow: hidden;
+  
+    &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/assets/kjgrn-1734668824.png') center/cover no-repeat;
+    opacity: 0.05;
+    z-index: 0;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 2rem 0.5rem;
+  }
+}
+
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.mainHeading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    margin-bottom: 2rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+  }
+}
+
+.partnerGrid {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  
+  @media (max-width: 1200px) {
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.partnerCard {
+  background: linear-gradient(135deg, #eaf0ff 0%, #f3e8ff 60%, #fff6ee 100%) !important;
+
+  border-radius: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  background: #e0e7ff;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  &::before {
+    content: '';
+    background: url('/assets/dots3.svg');
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.03;
+    z-index: 0;
+  }
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.2);
+  }
+  
+  @media (max-width: 1200px) {
+    padding: 2rem 1.2rem;
+    min-width: 220px;
+  }
+  
+  @media (max-width: 900px) {
+    flex: 1 1 calc(50% - 1rem);
+    min-width: 200px;
+    max-width: none;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
+  }
+}
+
+.partnerIcon {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+.partnerTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+  
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
+}
+
+.partnerDescription {
+  font-size: 1rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.partnerButton {
+  background: #2d3748;
+  color: #fff;
+  border: 2px solid #2d3748;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  margin-bottom: 10px;
+  width: fit-content;
+  align-self: center;
+  
+  &:hover {
+    background: #1a202c;
+    border-color: #1a202c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.1rem;
+  }
+} 
