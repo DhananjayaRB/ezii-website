@@ -3,9 +3,43 @@
 import React, { useState } from 'react';
 import styles from './pricingSection.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const PricingSection = ({showHeading = false}) => {
   const [employeeCount, setEmployeeCount] = useState('1');
+  const router = useRouter();
+
+  // Function to calculate monthly cost based on employee count
+  const calculateMonthlyCost = (count) => {
+    // Handle empty or invalid input
+    if (!count || count === '' || isNaN(count)) {
+      return 1000; // Minimum price for empty/invalid input
+    }
+    
+    const employeeCount = parseInt(count, 10);
+    
+    if (employeeCount <= 0) return 1000; // Minimum price
+    
+    let totalCost = 0;
+    
+    if (employeeCount <= 100) {
+      // 1-100 employees: 50/employee
+      totalCost = employeeCount * 50;
+    } else if (employeeCount <= 300) {
+      // 1-100: 50/employee, 101-300: 45/employee
+      totalCost = (100 * 50) + ((employeeCount - 100) * 45);
+    } else if (employeeCount <= 500) {
+      // 1-100: 50/employee, 101-300: 45/employee, 301-500: 40/employee
+      totalCost = (100 * 50) + (200 * 45) + ((employeeCount - 300) * 40);
+    } else {
+      // For more than 500 employees, use the 500 employee rate
+      totalCost = (100 * 50) + (200 * 45) + (200 * 40);
+    }
+    
+    // Ensure minimum price of 1000
+    return Math.max(totalCost, 1000);
+  };
 
   return (
     <section className={styles.pricingSection}>
@@ -50,9 +84,28 @@ const PricingSection = ({showHeading = false}) => {
                   id="employeeCountInput"
                   type="number"
                   min={1}
+                  max={9999999999}
                   value={employeeCount}
-                  onChange={e => setEmployeeCount(e.target.value.replace(/^0+/, ''))}
-                  onBlur={e => { if (!e.target.value || parseInt(e.target.value, 10) < 1) setEmployeeCount('1'); }}
+                  onChange={e => {
+                    const value = e.target.value.replace(/^0+/, '');
+                    const numValue = parseInt(value, 10);
+                    
+                    // Prevent negative numbers
+                    if (numValue < 0) {
+                      setEmployeeCount('1');
+                    }
+                    // Prevent numbers greater than max
+                    else if (numValue > 9999999999) {
+                      setEmployeeCount('9999999999');
+                    } else {
+                      setEmployeeCount(value);
+                    }
+                  }}
+                  onBlur={e => { 
+                    if (!e.target.value || parseInt(e.target.value, 10) < 1) {
+                      setEmployeeCount('1');
+                    }
+                  }}
                   className={styles.employeeInput}
                 />
               </div>
@@ -61,9 +114,22 @@ const PricingSection = ({showHeading = false}) => {
                 <span className={styles.countValue}>{employeeCount}</span>
               </div>
               <div className={styles.priceDisplay}>
-                <span className={styles.priceAmount}>₹{1000}/month</span>
+                {parseInt(employeeCount, 10) > 500 ? (
+                  <div className={styles.enterprisePricing}>
+                    <Link href="/contact" className={styles.priceAmount}>
+                      Contact Sales team for Enterprise Pricing
+                    </Link>
+                  </div>
+                ) : (
+                  <span className={styles.priceAmount}>₹{calculateMonthlyCost(employeeCount)}/month</span>
+                )}
               </div>
-              <button className={styles.getStartedBtn}>Get Started</button>
+              <button 
+                className={styles.getStartedBtn}
+                onClick={() => router.push('/onboarding')}
+              >
+                Get Started
+              </button>
               <p className={styles.minPriceNote}>*Min price 1000/month</p>
             </div>
           </div>

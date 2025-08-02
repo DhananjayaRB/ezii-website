@@ -5,6 +5,9 @@ import DINKCouples from '@/app/coomponents/articles/DINKCouples';
 import PFScheme from '@/app/coomponents/articles/PFScheme';
 import YoungProfessional from '@/app/coomponents/articles/YoungProfessional';
 import CBDTCircular from '@/app/coomponents/articles/CBDTCircular';
+import COVID19Lockdown from '@/app/coomponents/articles/COVID19Lockdown';
+import ESIContribution from '@/app/coomponents/articles/ESIContribution';
+import ITRDisclosures from '@/app/coomponents/articles/ITRDisclosures';
 import styles from './article.module.scss';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -20,8 +23,11 @@ export default function ArticlePage({ params }) {
     '3': PFScheme,
     '4': YoungProfessional,
     '5': CBDTCircular,
+    '6': COVID19Lockdown,
+    '7': ESIContribution,
+    '8': ITRDisclosures,
     // Add more articles as they are created
-    // '6': Article6,
+    // '9': Article9,
     // etc.
   };
 
