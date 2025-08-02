@@ -8,7 +8,7 @@ import TestimonialsSection from '../TestimonialsSection';
 import ContactForm from '../ContactForm';
 import FAQSection from '../FAQSection';
 import Footer from '../Footer';
-import {BlogPost} from '../articles/test';
+// import {BlogPost} from '../articles/test';
 const clientLogos = [
   'client-2.webp',
   'client-3.webp',

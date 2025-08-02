@@ -40,7 +40,7 @@ export default function CBDTCircular() {
           </div>
 
           <p>
-            Salaried tax payers to make one time declaration to their employers of their tax regime choice. New or old tax regime. <a href="/wp-content/uploads/2020/04/Circular-regarding-TDS-on-115BAC-income.pdf" download="/wp-content/uploads/2020/04/Circular-regarding-TDS-on-115BAC-income.pdf">Download the CBDT circular dated April 14th, 2020</a>
+            Salaried tax payers to make one time declaration to their employers of their tax regime choice. New or old tax regime. <a href="/assets/cst.pdf" download="cst.pdf">Download the CBDT circular dated April 14th, 2020</a>
           </p>
         </article>
 
