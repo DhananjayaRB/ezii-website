@@ -457,6 +457,7 @@
 }
 
 @media (max-width: 375px) {
+
   .btn-secondary,
   .btn-primary {
     padding: 8px 16px;
@@ -870,8 +871,8 @@
 // Ant Design Form Styles
 .antdFormContainer {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 50px;
+  // padding: 20px 40px;
 }
 
 .formCard {
@@ -890,7 +891,7 @@
 
 .formHeader {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .formTitle {
@@ -908,7 +909,7 @@
 }
 
 .formSubtitle {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-secondary);
 }
 
@@ -918,27 +919,28 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 16px;
 }
 
 .antdForm {
   .ant-form-item {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .ant-form-item-label {
     label {
       font-weight: 600;
       color: var(--text-primary);
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 }
 
 .antdInput {
   border-radius: 8px;
-  border: 2px solid #f0f0f0;
+  border: 1px solid #f0f0f0;
   transition: all 0.3s ease;
-  font-size: 14px;
+  font-size: 13px;
 
   &:hover {
     border-color: var(--primary);
@@ -958,9 +960,9 @@
 .antdSelect {
   .ant-select-selector {
     border-radius: 8px !important;
-    border: 2px solid #f0f0f0 !important;
+    border: 1px solid #f0f0f0 !important;
     transition: all 0.3s ease !important;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   &:hover .ant-select-selector {
@@ -975,25 +977,25 @@
 
 .formActions {
   text-align: center;
-  margin-top: 40px;
-  padding-top: 30px;
+  margin-top: 30px;
+  padding-top: 20px;
   border-top: 1px solid #f0f0f0;
 }
 
 .submitButton {
-  height: 48px;
-  padding: 0 32px;
-  font-size: 16px;
+  height: 40px;
+  padding: 0 24px;
+  font-size: 14px;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 6px;
   background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
   border: none;
-  box-shadow: 0 4px 12px rgba(44, 44, 233, 0.3);
+  box-shadow: 0 2px 8px rgba(44, 44, 233, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(44, 44, 233, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44, 44, 233, 0.4);
     background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
   }
 
@@ -1002,7 +1004,7 @@
   }
 
   .anticon {
-    margin-right: 8px;
+    margin-right: 6px;
   }
 }
 
@@ -1011,7 +1013,7 @@
   background: white;
   border-radius: 16px;
   padding: 30px;
-  margin-bottom: 30px;
+  margin: 50px 50px 0 50px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #f0f0f0;
 }
@@ -1037,7 +1039,7 @@
 
 // Features Component Styles
 .featuresContainer {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -1058,7 +1060,7 @@
 
 .featuresHeader {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .featuresTitle {
@@ -1072,11 +1074,11 @@
 
 .featuresIcon {
   color: var(--primary);
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .featuresSubtitle {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-secondary);
 }
 
@@ -1087,10 +1089,12 @@
 }
 
 .featureCard {
-  border-radius: 12px;
-  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
   transition: all 0.3s ease;
   height: 100%;
+  padding: 10px;
+  min-height: 140px;
 
   &:hover {
     border-color: var(--primary);
@@ -1107,14 +1111,14 @@
 .featureHeader {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 10px;
 }
 
 .featureIcon {
   color: var(--primary);
-  font-size: 24px;
-  margin-top: 4px;
+  font-size: 18px;
+  margin-top: 2px;
 }
 
 .featureInfo {
@@ -1122,34 +1126,35 @@
 }
 
 .featureName {
-  margin-bottom: 8px !important;
+  margin-bottom: 4px !important;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  font-size: 13px;
 }
 
 .popularTag {
-  font-size: 10px;
-  padding: 2px 6px;
+  font-size: 8px;
+  padding: 1px 4px;
 }
 
 .featureDescription {
-  font-size: 13px;
-  line-height: 1.4;
+  font-size: 11px;
+  line-height: 1.2;
 }
 
 .featureFooter {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid #f0f0f0;
 }
 
 .featurePrice {
   color: var(--primary);
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .featureSwitch {
@@ -1233,17 +1238,51 @@
 .pricingTabsComponent {
   .ant-tabs-tab {
     padding: 8px 12px;
-    border-radius: 8px;
+    margin: 0 2px;
+    border-radius: 6px;
+    border: 1px solid #e8e8e8;
+    background: white;
     transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 100px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
 
     &:hover {
-      background-color: rgba(44, 44, 233, 0.1);
+      border-color: var(--primary);
+      background-color: rgba(44, 44, 233, 0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(44, 44, 233, 0.15);
     }
 
     &.ant-tabs-tab-active {
       background-color: var(--primary);
       color: white;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(44, 44, 233, 0.25);
+      transform: translateY(-1px);
+
+      .tabLabel {
+        color: white;
+      }
+
+      .tabAmount {
+        color: white;
+      }
+
+      .pricingTabTags {
+        .ant-tag {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.3);
+          color: white;
+        }
+      }
     }
+  }
+
+  .ant-tabs-ink-bar {
+    display: none;
   }
 }
 
@@ -1251,54 +1290,114 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+  font-size: 10px;
+}
+
+.tabLabel {
   font-size: 12px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.tabAmount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.pricingTabTags {
+  display: flex;
+  gap: 2px;
+  margin-top: 2px;
+
+  .ant-tag {
+    font-size: 8px;
+    padding: 0 4px;
+    line-height: 1.2;
+  }
 }
 
 .pricingSummary {
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .basePrice,
-.featuresPrice {
+.gstPrice {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.selectedFeaturesSection {
+  margin: 16px 0;
+}
+
+.selectedFeaturesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.selectedFeaturesTitle {
+  font-size: 12px;
+  margin: 0 !important;
+}
+
+.selectedFeaturesCount {
+  font-size: 10px;
+}
+
+.selectedFeaturesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.selectedFeatureTag {
+  font-size: 10px;
+  padding: 2px 6px;
+  margin: 0;
+}
+
+.noFeaturesSelected {
+  font-size: 10px;
+  font-style: italic;
 }
 
 .totalPrice {
   text-align: center;
-  margin: 24px 0;
-  padding: 20px;
-  background: linear-gradient(135deg, rgba(44, 44, 233, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
-  border-radius: 12px;
-}
-
-.totalAmount {
-  color: var(--primary);
-  margin: 0 !important;
-}
-
-.featuresAlert {
   margin: 16px 0;
-  border-radius: 8px;
+
+  h4 {
+    margin-bottom: 8px !important;
+    font-size: 14px;
+  }
+
+  h3 {
+    margin: 0 !important;
+    font-size: 20px;
+    color: var(--primary);
+  }
 }
 
 .proceedButton {
-  height: 48px;
-  font-size: 16px;
+  height: 40px;
+  font-size: 14px;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 6px;
   background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
   border: none;
-  box-shadow: 0 4px 12px rgba(44, 44, 233, 0.3);
+  box-shadow: 0 2px 8px rgba(44, 44, 233, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(44, 44, 233, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44, 44, 233, 0.4);
     background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
   }
 
@@ -1307,7 +1406,7 @@
   }
 
   .anticon {
-    margin-right: 8px;
+    margin-right: 6px;
   }
 }
 
@@ -1316,8 +1415,8 @@
 .failureContainer {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px 20px;
-  min-height: 60vh;
+  padding: 20px 20px;
+  min-height: 40vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1381,6 +1480,159 @@
   margin-bottom: 0 !important;
 }
 
+.subscriptionDetails {
+  margin-top: 24px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  h4 {
+    margin-bottom: 16px !important;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+}
+
+.subscriptionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .ant-typography {
+    margin: 0 !important;
+  }
+}
+
+// Small and Sweet Success Page Styles
+.successCardSmall {
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.98);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+  margin: 0;
+
+  &:hover {
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+}
+
+.successIconSmall {
+  font-size: 60px !important;
+  color: var(--success);
+  margin-bottom: 12px;
+}
+
+.successTitleSmall {
+  color: var(--text-primary);
+  margin-bottom: 8px !important;
+  text-align: center;
+  font-size: 24px !important;
+}
+
+.successSubtitleSmall {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.successMessageSmall {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.successDetailsSmall {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin-bottom: 0 !important;
+}
+
+.subscriptionDetailsSmall {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  h5 {
+    margin-bottom: 8px !important;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 16px !important;
+  }
+}
+
+.subscriptionRowSmall {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .ant-typography {
+    margin: 0 !important;
+    font-size: 14px !important;
+  }
+}
+
+.getStartedButtonSmall,
+.homeButtonSmall {
+  height: 40px;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  .anticon {
+    margin-right: 6px;
+  }
+}
+
+.getStartedButtonSmall {
+  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+  border: none;
+  box-shadow: 0 3px 10px rgba(44, 44, 233, 0.25);
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(44, 44, 233, 0.35);
+    background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
+  }
+}
+
+.homeButtonSmall {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+}
+
 .getStartedButton,
 .retryButton {
   height: 48px;
@@ -1431,6 +1683,56 @@
   }
 }
 
+// Enterprise message styles
+.enterpriseMessage {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  padding: 24px;
+}
+
+.enterpriseTitle {
+  margin-bottom: 16px !important;
+  font-size: 18px;
+}
+
+.enterpriseText {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.enterpriseActions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.contactSalesButton {
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+  border: none;
+  box-shadow: 0 2px 8px rgba(44, 44, 233, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44, 44, 233, 0.4);
+    background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .anticon {
+    margin-right: 6px;
+  }
+}
+
 // Utility classes
 .out-right {
   position: relative;
@@ -1439,4 +1741,2055 @@
 .out-right .col-xl-5 {
   position: sticky;
   top: 20px;
-} 
+}
+
+// Responsive styles for features page
+@media (max-width: 1200px) {
+  .featuresContainer {
+    padding: 16px;
+  }
+
+  .featuresCard {
+    margin: 0;
+  }
+
+  .pricingTabsComponent {
+    .ant-tabs-tab {
+      min-width: 100px;
+      padding: 10px 12px;
+    }
+  }
+
+  .featureCard {
+    padding: 16px;
+  }
+
+  .featureName {
+    font-size: 14px !important;
+  }
+
+  .featureDescription {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .featuresContainer {
+    padding: 12px;
+  }
+
+  .featuresHeader {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .featuresTitle {
+    font-size: 20px !important;
+  }
+
+  .featuresSubtitle {
+    font-size: 14px;
+  }
+
+  .pricingTabsComponent {
+    .ant-tabs-tab {
+      min-width: 80px;
+      padding: 8px 10px;
+      margin: 0 2px;
+    }
+  }
+
+  .tabLabel {
+    font-size: 12px;
+  }
+
+  .tabAmount {
+    font-size: 14px;
+  }
+
+  .featureCard {
+    padding: 12px;
+  }
+
+  .featureHeader {
+    gap: 8px;
+  }
+
+  .featureIcon {
+    font-size: 20px;
+  }
+
+  .featureName {
+    font-size: 13px !important;
+  }
+
+  .featureDescription {
+    font-size: 11px;
+  }
+
+  .featureFooter {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  .featurePrice {
+    font-size: 14px;
+  }
+
+  .pricingSummary {
+    margin-top: 16px;
+  }
+
+  .basePrice,
+  .gstPrice {
+    font-size: 13px;
+  }
+
+  .totalPrice {
+    .ant-typography {
+      font-size: 16px !important;
+    }
+  }
+
+  .proceedButton {
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featuresContainer {
+    padding: 8px;
+  }
+
+  .featuresCard {
+    border-radius: 8px;
+  }
+
+  .pricingTabsComponent {
+    .ant-tabs-tab {
+      min-width: 70px;
+      padding: 6px 8px;
+      margin: 0 1px;
+    }
+  }
+
+  .tabLabel {
+    font-size: 11px;
+  }
+
+  .tabAmount {
+    font-size: 12px;
+  }
+
+  .featureCard {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .featureName {
+    font-size: 12px !important;
+  }
+
+  .featureDescription {
+    font-size: 10px;
+  }
+
+  .featurePrice {
+    font-size: 12px;
+  }
+
+  .pricingSummary {
+    margin-top: 12px;
+  }
+
+  .basePrice,
+  .gstPrice {
+    font-size: 12px;
+  }
+
+  .totalPrice {
+    .ant-typography {
+      font-size: 14px !important;
+    }
+  }
+
+  .proceedButton {
+    height: 36px;
+    font-size: 13px;
+  }
+}
+
+// Compliance Modal Styles
+.complianceModal {
+  .ant-modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .ant-modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-bottom: none;
+    padding: 20px 24px;
+
+    .ant-modal-title {
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 24px;
+  }
+
+  .ant-modal-footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 16px 24px;
+  }
+}
+
+.complianceModalTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+
+  .complianceModalIcon {
+    font-size: 20px;
+  }
+}
+
+.complianceModalContent {
+  .complianceModalDescription {
+    display: block;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+  }
+}
+
+.complianceOptions {
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  .complianceOptionCard {
+    margin-bottom: 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #1890ff;
+      box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+    }
+
+    &.complianceOptionCardActive {
+      border-color: #1890ff;
+      background-color: #f6ffed;
+      box-shadow: 0 2px 8px rgba(24, 144, 255, 0.15);
+    }
+
+    .complianceOptionContent {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .complianceOptionHeader {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .complianceCheckbox {
+      margin-top: 4px;
+
+      .ant-checkbox-wrapper {
+        font-size: 16px;
+      }
+    }
+
+    .complianceOptionInfo {
+      flex: 1;
+
+      .complianceOptionName {
+        margin: 0 0 4px 0;
+        font-weight: 600;
+        color: #262626;
+      }
+
+      .complianceOptionDescription {
+        font-size: 13px;
+        line-height: 1.5;
+        color: #666;
+        margin: 0;
+      }
+    }
+
+    .complianceOptionPrice {
+      text-align: right;
+      min-width: 80px;
+
+      .compliancePrice {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1890ff;
+      }
+    }
+  }
+}
+
+.complianceSummary {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e8e8e8;
+
+  .complianceSummaryHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .ant-typography {
+      margin: 0;
+    }
+  }
+
+  .complianceSummaryList {
+    .complianceSummaryItem {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+      color: #666;
+    }
+  }
+}
+
+.complianceModalConfirmButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  font-weight: 600;
+  padding: 8px 24px;
+  height: auto;
+  border-radius: 6px;
+
+  &:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+}
+
+// Responsive styles for compliance modal
+@media (max-width: 768px) {
+  .complianceModal {
+    .ant-modal {
+      width: 95% !important;
+      max-width: 500px;
+    }
+
+    .ant-modal-body {
+      padding: 16px;
+    }
+  }
+
+  .complianceOptions {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .complianceOptionCard {
+    .complianceOptionContent {
+      gap: 12px;
+    }
+
+    .complianceOptionHeader {
+      gap: 8px;
+    }
+
+    .complianceOptionName {
+      font-size: 14px !important;
+    }
+
+    .complianceOptionDescription {
+      font-size: 12px;
+    }
+
+    .compliancePrice {
+      font-size: 14px;
+    }
+  }
+
+  .complianceSummary {
+    padding: 12px;
+
+    .complianceSummaryHeader {
+      margin-bottom: 8px;
+    }
+
+    .complianceSummaryItem {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .complianceModal {
+    .ant-modal {
+      width: 98% !important;
+      max-width: 400px;
+    }
+
+    .ant-modal-header {
+      padding: 16px 20px;
+    }
+
+    .ant-modal-body {
+      padding: 12px;
+    }
+
+    .ant-modal-footer {
+      padding: 12px 20px;
+    }
+  }
+
+  .complianceOptions {
+    gap: 8px;
+  }
+
+  .complianceOptionCard {
+    .complianceOptionContent {
+      gap: 8px;
+    }
+
+    .complianceOptionHeader {
+      gap: 6px;
+    }
+
+    .complianceOptionName {
+      font-size: 13px !important;
+    }
+
+    .complianceOptionDescription {
+      font-size: 11px;
+    }
+
+    .compliancePrice {
+      font-size: 12px;
+    }
+  }
+
+  .complianceSummary {
+    padding: 8px;
+
+    .complianceSummaryItem {
+      font-size: 11px;
+    }
+  }
+}
+
+// Pricing amounts display styles
+.pricingAmounts {
+  margin-top: 16px;
+  padding: 16px 0;
+  border-top: 1px solid #f0f0f0;
+
+  .amountRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .amountColumn {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .amountLabel {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+    text-transform: uppercase;
+  }
+
+  .amountValue {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1890ff;
+  }
+}
+
+// Modern Registration Styles
+.modernBg {
+  background: white;
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.modernContentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modernHeader {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 0;
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    padding: 16px 0;
+    margin-bottom: 24px;
+  }
+}
+
+.modernLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+
+  .logoIcon {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logoText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1 {
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1;
+    }
+
+    span {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+}
+
+.modernPageTitle {
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 12px;
+    padding: 0 16px;
+  }
+
+  .titleContent {
+    h2 {
+      color: var(--text-primary);
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      line-height: 1.2;
+
+      @media (max-width: 768px) {
+        font-size: 22px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 18px;
+      }
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0;
+      line-height: 1.4;
+
+      @media (max-width: 768px) {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.modernStepperWrapper {
+  margin-bottom: 16px;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 12px;
+    padding: 0 16px;
+  }
+}
+
+.stepperContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    gap: 12px;
+  }
+}
+
+.modernStepperItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 6px;
+  min-width: 120px;
+
+  @media (max-width: 768px) {
+    padding: 4px;
+    min-width: 100px;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 80px;
+    padding: 2px;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &.modernActive {
+    .modernStepNumber {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .modernStepName {
+      color: var(--primary);
+      font-weight: 700;
+    }
+  }
+
+  &.modernInactive {
+    opacity: 0.7;
+  }
+
+  &.modernCursor {
+    cursor: pointer;
+  }
+
+  &.modernDisabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.modernStepCounter {
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.modernStepNumber {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e9ecef;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  border: 2px solid #dee2e6;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+
+.modernStepNumberSelected {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  border: 2px solid var(--primary);
+  box-shadow: 0 4px 16px rgba(44, 44, 233, 0.3);
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+
+.modernStepperCompleted {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #10b981;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.modernStepName {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 2px;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+}
+
+.modernStepDescription {
+  color: var(--text-secondary);
+  font-size: 10px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
+}
+
+.modernStepperConnector {
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+
+  @media (max-width: 768px) {
+    max-width: 50px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 30px;
+  }
+}
+
+.connectorLine {
+  height: 2px;
+  background: #e9ecef;
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: var(--primary);
+    transition: width 0.3s ease;
+  }
+
+  .modernActive+.modernStepperConnector &::after {
+    width: 100%;
+  }
+}
+
+.modernContentArea {
+  flex: 1;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
+}
+
+.modernFooter {
+  margin-top: 60px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+  @media (max-width: 768px) {
+    margin-top: 40px;
+    padding: 16px;
+  }
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+  }
+}
+
+.footerLinks {
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    gap: 16px;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+// Enhanced mobile responsiveness for existing components
+@media (max-width: 768px) {
+  .antdFormContainer {
+    margin: 0;
+    padding: 0;
+  }
+
+  .formCard {
+    border-radius: 12px;
+    margin: 0;
+  }
+
+  .featuresContainer {
+    padding: 0;
+  }
+
+  .featuresCard {
+    border-radius: 12px;
+    margin: 0;
+  }
+
+  .stepper-wrapper {
+    margin: 0 0 20px 0;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modernStepperItem {
+    min-width: 80px;
+    padding: 8px 4px;
+  }
+
+  .modernStepNumber,
+  .modernStepNumberSelected,
+  .modernStepperCompleted {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .modernStepName {
+    font-size: 10px;
+  }
+
+  .modernStepDescription {
+    font-size: 8px;
+  }
+}
+
+// Modern Form Styles
+.modernFormContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+}
+
+.modernFormCard {
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 16px;
+    margin: 0;
+  }
+}
+
+.modernFormHeader {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+    padding: 0 16px;
+  }
+}
+
+.modernFormTitle {
+  color: var(--text-primary);
+  margin-bottom: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.modernFormIcon {
+  color: var(--primary);
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.modernFormSubtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.modernDivider {
+  margin: 24px 0;
+  border-color: rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    margin: 16px 0;
+  }
+}
+
+.modernAntdForm {
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
+
+  .ant-form-item {
+    margin-bottom: 16px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 12px;
+    }
+  }
+
+  .ant-form-item-label {
+    label {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 14px;
+
+      @media (max-width: 768px) {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.modernFormLabel {
+  .anticon {
+    color: var(--primary);
+    font-size: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.modernAntdInput {
+  border-radius: 12px;
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  height: 48px;
+
+  @media (max-width: 768px) {
+    height: 44px;
+    font-size: 13px;
+  }
+
+  &:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
+  }
+
+  &:focus,
+  &.ant-input-focused {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
+  }
+
+  &::placeholder {
+    color: #bfbfbf;
+  }
+}
+
+.modernAntdSelect {
+  .ant-select-selector {
+    border-radius: 12px !important;
+    border: 2px solid #f0f0f0 !important;
+    transition: all 0.3s ease !important;
+    font-size: 14px;
+    height: 48px !important;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      height: 44px !important;
+      font-size: 13px;
+    }
+  }
+
+  &:hover .ant-select-selector {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
+  }
+
+  &.ant-select-focused .ant-select-selector {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1) !important;
+  }
+}
+
+.modernSectionDivider {
+  margin: 32px 0 24px 0;
+  border-color: rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    margin: 24px 0 16px 0;
+  }
+}
+
+.modernSectionTitle {
+  color: var(--text-primary);
+  margin-bottom: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  .anticon {
+    color: var(--primary);
+    font-size: 18px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+}
+
+.modernFormActions {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+
+  @media (max-width: 768px) {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+}
+
+.modernSubmitButton {
+  height: 48px;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%) !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(44, 44, 233, 0.3) !important;
+
+  @media (max-width: 768px) {
+    height: 44px;
+    padding: 0 24px;
+    font-size: 14px;
+  }
+
+  // Override Ant Design hover styles
+  &:hover {
+    background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%) !important;
+    border: none !important;
+    box-shadow: 0 4px 16px rgba(44, 44, 233, 0.4) !important;
+    transform: none !important;
+  }
+
+  &:active {
+    background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%) !important;
+    border: none !important;
+    box-shadow: 0 4px 16px rgba(44, 44, 233, 0.3) !important;
+    transform: none !important;
+  }
+
+  &:focus {
+    background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%) !important;
+    border: none !important;
+    box-shadow: 0 4px 16px rgba(44, 44, 233, 0.3) !important;
+    transform: none !important;
+  }
+
+  .anticon {
+    margin-right: 8px;
+
+    @media (max-width: 768px) {
+      margin-right: 6px;
+    }
+  }
+}
+
+.errorMessage {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 6px;
+  text-align: center;
+  color: #cf1322;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+.paymentStatusMessage {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+.paymentSuccessMessage {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 6px;
+  text-align: center;
+  color: #52c41a;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+.paymentErrorMessage {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 6px;
+  text-align: center;
+  color: #cf1322;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+// Enhanced mobile responsiveness for form elements
+@media (max-width: 768px) {
+  .modernFormContainer {
+    margin: 0;
+  }
+
+  .modernFormCard {
+    border-radius: 12px;
+    margin: 0;
+  }
+
+  .modernFormHeader {
+    padding: 0 16px;
+  }
+
+  .modernAntdForm {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modernFormTitle {
+    font-size: 18px;
+  }
+
+  .modernFormIcon {
+    font-size: 18px;
+  }
+
+  .modernFormSubtitle {
+    font-size: 13px;
+  }
+
+  .modernAntdInput {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .modernAntdSelect .ant-select-selector {
+    height: 40px !important;
+    font-size: 12px;
+  }
+
+  .modernSubmitButton {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 13px;
+  }
+}
+
+// Modern Features Styles
+.modernFeaturesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+}
+
+.modernFeaturesHeader {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+    padding: 0 16px;
+  }
+}
+
+.modernFeaturesTitle {
+  color: var(--text-primary);
+  margin-bottom: 6px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 22px;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+.modernFeaturesIcon {
+  color: var(--primary);
+  font-size: 22px;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+.modernFeaturesSubtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+}
+
+.modernFeaturesListCard {
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    border-radius: 12px;
+    margin: 0;
+  }
+}
+
+.modernFeatureCard {
+  border-radius: 12px;
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  padding: 10px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  // Override Ant Design Card styles
+  :global(.ant-card-body) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px;
+    min-height: 160px;
+  }
+
+  &:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(44, 44, 233, 0.12);
+  }
+
+  &.modernFeatureCardActive {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(44, 44, 233, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+  }
+}
+
+.modernFeatureHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+}
+
+.modernFeatureIcon {
+  color: var(--primary);
+  font-size: 18px;
+  margin-top: 2px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.modernFeatureInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.modernFeatureName {
+  margin-bottom: 4px !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+}
+
+.modernPopularTag {
+  font-size: 7px;
+  padding: 1px 3px;
+
+  @media (max-width: 768px) {
+    font-size: 6px;
+    padding: 1px 2px;
+  }
+}
+
+.modernFeatureContent {
+  flex: 1;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    margin-bottom: 6px;
+  }
+}
+
+.modernFeatureDescription {
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+}
+
+.modernFeatureFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 6px;
+  border-top: 1px solid #f0f0f0;
+  height: 36px;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    padding-top: 5px;
+    height: 32px;
+  }
+}
+
+.modernFeaturePrice {
+  color: var(--primary);
+  font-size: 12px;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+}
+
+.modernFeatureSwitch {
+  .ant-switch-checked {
+    background-color: var(--primary);
+  }
+}
+
+.modernPricingCard {
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: sticky;
+  top: 20px;
+
+  @media (max-width: 768px) {
+    border-radius: 12px;
+    margin: 0;
+    position: static;
+  }
+}
+
+.modernPricingTabsComponent {
+  .ant-tabs-tab {
+    padding: 8px 12px;
+    margin: 0 3px;
+    border-radius: 10px;
+    border: 2px solid #e8e8e8;
+    background: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 100px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    font-size: 12px;
+
+    @media (max-width: 768px) {
+      padding: 6px 10px;
+      min-width: 80px;
+      font-size: 11px;
+    }
+
+    &:hover {
+      border-color: var(--primary);
+      background-color: rgba(44, 44, 233, 0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(44, 44, 233, 0.12);
+    }
+
+    &.ant-tabs-tab-active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(44, 44, 233, 0.2);
+      transform: translateY(-1px);
+
+      .modernTabLabel {
+        color: white;
+      }
+
+      .modernTabAmount {
+        color: white;
+      }
+
+      .modernPricingTabTags {
+        .ant-tag {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.3);
+          color: white;
+        }
+      }
+    }
+  }
+
+  .ant-tabs-ink-bar {
+    display: none;
+  }
+}
+
+.modernPricingTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
+}
+
+.modernTabLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #262626;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+}
+
+.modernTabAmount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+
+.modernPricingTabTags {
+  display: flex;
+  gap: 2px;
+  margin-top: 2px;
+
+  .ant-tag {
+    font-size: 7px;
+    padding: 0 3px;
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+      font-size: 6px;
+      padding: 0 2px;
+    }
+  }
+}
+
+.modernPricingSummary {
+  margin-top: 16px;
+
+  @media (max-width: 768px) {
+    margin-top: 12px;
+  }
+}
+
+.modernBasePrice,
+.modernGstPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+}
+
+.modernSelectedFeaturesSection {
+  margin: 16px 0;
+
+  @media (max-width: 768px) {
+    margin: 12px 0;
+  }
+}
+
+.modernSelectedFeaturesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 6px;
+  }
+}
+
+.modernSelectedFeaturesTitle {
+  font-size: 12px;
+  margin: 0 !important;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+}
+
+.modernSelectedFeaturesCount {
+  font-size: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
+}
+
+.modernSelectedFeaturesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+
+  @media (max-width: 768px) {
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+}
+
+.modernSelectedFeatureTag {
+  font-size: 10px;
+  padding: 2px 5px;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+    padding: 1px 3px;
+  }
+}
+
+.modernNoFeaturesSelected {
+  font-size: 10px;
+  font-style: italic;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
+}
+
+.modernTotalPrice {
+  text-align: center;
+  margin: 16px 0;
+
+  @media (max-width: 768px) {
+    margin: 12px 0;
+  }
+
+  h4 {
+    margin-bottom: 8px !important;
+    font-size: 14px;
+
+    @media (max-width: 768px) {
+      font-size: 13px;
+    }
+  }
+
+  h3 {
+    margin: 0 !important;
+    font-size: 20px;
+    color: var(--primary);
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
+}
+
+.modernProceedButton {
+  height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(44, 44, 233, 0.25);
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(44, 44, 233, 0.3);
+    background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .anticon {
+    margin-right: 6px;
+
+    @media (max-width: 768px) {
+      margin-right: 5px;
+    }
+  }
+}
+
+.modernEnterpriseMessage {
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 24px;
+
+  @media (max-width: 768px) {
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+}
+
+.modernEnterpriseTitle {
+  margin-bottom: 16px !important;
+  font-size: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 12px !important;
+  }
+}
+
+.modernEnterpriseText {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+}
+
+.modernEnterpriseActions {
+  margin-top: 20px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    margin-top: 16px;
+  }
+}
+
+.modernContactSalesButton {
+  height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(44, 44, 233, 0.25);
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(44, 44, 233, 0.3);
+    background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .anticon {
+    margin-right: 6px;
+
+    @media (max-width: 768px) {
+      margin-right: 5px;
+    }
+  }
+}
+
+// Enhanced mobile responsiveness for features
+@media (max-width: 768px) {
+  .modernFeaturesContainer {
+    margin: 0;
+  }
+
+  .modernFeaturesListCard,
+  .modernPricingCard {
+    border-radius: 12px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .modernFeatureCard {
+    padding: 10px;
+    min-height: 120px;
+  }
+
+  .modernFeatureName {
+    font-size: 12px !important;
+  }
+
+  .modernFeatureDescription {
+    font-size: 10px;
+  }
+
+  .modernFeaturePrice {
+    font-size: 11px;
+  }
+
+  .modernPricingTabsComponent .ant-tabs-tab {
+    padding: 6px 8px;
+    min-width: 80px;
+    font-size: 11px;
+  }
+
+  .modernTabLabel {
+    font-size: 11px;
+  }
+
+  .modernTabAmount {
+    font-size: 12px;
+  }
+
+  .modernTotalPrice h3 {
+    font-size: 18px;
+  }
+
+  .modernProceedButton {
+    height: 40px;
+    font-size: 13px;
+  }
+}
+
+// Payment Processing Modal Styles
+.paymentProcessingModal {
+  .ant-modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .ant-modal-header {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    border-bottom: none;
+    padding: 20px 24px;
+
+    .ant-modal-title {
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 24px;
+  }
+}
+
+.paymentProcessingModalTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+
+  .paymentProcessingModalIcon {
+    font-size: 20px;
+  }
+}
+
+.paymentProcessingModalContent {
+  text-align: center;
+  padding: 20px 0;
+
+  .paymentProcessingIcon {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .paymentProcessingTitle {
+    margin-bottom: 16px;
+    color: #ff6b6b;
+    font-weight: 600;
+  }
+
+  .paymentProcessingDescription {
+    display: block;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    text-align: center;
+  }
+
+  .paymentProcessingWarning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+    background-color: #fff2f0;
+    border: 1px solid #ffccc7;
+    border-radius: 8px;
+    margin-top: 16px;
+
+    .paymentProcessingWarningIcon {
+      color: #ff4d4f;
+      font-size: 16px;
+    }
+
+    .paymentProcessingWarningText {
+      color: #ff4d4f;
+      font-size: 13px;
+      margin: 0;
+    }
+  }
+}
+
+// Mobile responsiveness for payment processing modal
+@media (max-width: 768px) {
+  .paymentProcessingModal {
+    .ant-modal-content {
+      margin: 16px;
+      border-radius: 8px;
+    }
+
+    .ant-modal-header {
+      padding: 16px 20px;
+    }
+
+    .ant-modal-body {
+      padding: 20px;
+    }
+  }
+
+  .paymentProcessingModalContent {
+    padding: 16px 0;
+
+    .paymentProcessingTitle {
+      font-size: 16px;
+    }
+
+    .paymentProcessingDescription {
+      font-size: 13px;
+    }
+
+    .paymentProcessingWarning {
+      padding: 12px;
+      margin-top: 12px;
+
+      .paymentProcessingWarningText {
+        font-size: 12px;
+      }
+    }
+  }
+}

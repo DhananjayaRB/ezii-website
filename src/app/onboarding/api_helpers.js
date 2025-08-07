@@ -1,7 +1,7 @@
-import API_ENDPOINTS from './constants/endpoints';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://dev-api.resolveindia.com';
 
 export async function confirmPayment(payload) {
-  const response = await fetch(API_ENDPOINTS.CONFIRM_PAYMENT, {
+  const response = await fetch(`${apiUrl}/organization/confirm-payment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function confirmPayment(payload) {
 
 export async function paymentStatus(link_id) {
   const response = await fetch(
-    `${API_ENDPOINTS.PAYMENT_STATUS}/${link_id}`,
+    `${apiUrl}/organization/payment-status/${link_id}`,
     {
       method: "GET",
       headers: {
@@ -51,7 +51,7 @@ export async function createOrganizationMaster(payload) {
     }
   }
 
-  const response = await fetch(API_ENDPOINTS.CREATE_ORGANIZATION_MASTER, {
+  const response = await fetch(`${apiUrl}/organization/master-sass`, {
     method: "POST",
     body: formData,
   });
@@ -65,7 +65,7 @@ export async function createOrganizationMaster(payload) {
 }
 
 export async function addAdminUser(payload) {
-  const response = await fetch(API_ENDPOINTS.ADD_ADMIN_USER, {
+  const response = await fetch(`${apiUrl}/organization/admin-master-sass`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export async function addAdminUser(payload) {
 }
 
 export async function coreMasterSaas(payload) {
-  const response = await fetch(API_ENDPOINTS.CORE_MASTER_SAAS, {
+  const response = await fetch(`${apiUrl}/organization/core-master-sass`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -99,12 +99,15 @@ export async function coreMasterSaas(payload) {
 }
 
 export async function getMailCredential() {
-  const response = await fetch(API_ENDPOINTS.GET_MAIL_CREDENTIAL, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `${apiUrl}/organization/mail-credential-sass/4/0`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`Error fetching data: ${response.statusText}`);
@@ -115,7 +118,7 @@ export async function getMailCredential() {
 }
 
 export async function sendLoginInfoMail(payload) {
-  const response = await fetch(API_ENDPOINTS.SEND_LOGIN_INFO_MAIL, {
+  const response = await fetch(`${apiUrl}/organization/mail-credential-sass`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -124,7 +127,7 @@ export async function sendLoginInfoMail(payload) {
   });
 
   if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
+    throw new Error(`Error fetching data: ${response.statusText}`);
   }
 
   const data = await response.json();
@@ -132,7 +135,7 @@ export async function sendLoginInfoMail(payload) {
 }
 
 export async function savePAN(payload) {
-  const response = await fetch(API_ENDPOINTS.SAVE_PAN, {
+  const response = await fetch(`${apiUrl}/organization/save-pan`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -141,7 +144,7 @@ export async function savePAN(payload) {
   });
 
   if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
+    throw new Error(`Error fetching data: ${response.statusText}`);
   }
 
   const data = await response.json();
@@ -149,7 +152,7 @@ export async function savePAN(payload) {
 }
 
 export async function saveGST(payload) {
-  const response = await fetch(API_ENDPOINTS.SAVE_GST, {
+  const response = await fetch(`${apiUrl}/organization/save-gst`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -158,7 +161,7 @@ export async function saveGST(payload) {
   });
 
   if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
+    throw new Error(`Error fetching data: ${response.statusText}`);
   }
 
   const data = await response.json();
@@ -166,7 +169,7 @@ export async function saveGST(payload) {
 }
 
 export async function savePaymentInfo(payload) {
-  const response = await fetch(API_ENDPOINTS.SAVE_PAYMENT_INFO, {
+  const response = await fetch(`${apiUrl}/organization/save-saas`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -175,7 +178,7 @@ export async function savePaymentInfo(payload) {
   });
 
   if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
+    throw new Error(`Error fetching data: ${response.statusText}`);
   }
 
   const data = await response.json();
@@ -183,7 +186,7 @@ export async function savePaymentInfo(payload) {
 }
 
 export async function getBusinessType() {
-  const response = await fetch(API_ENDPOINTS.GET_BUSINESS_TYPE, {
+  const response = await fetch(`${apiUrl}/organization/masters-saas/type`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -199,7 +202,7 @@ export async function getBusinessType() {
 }
 
 export async function getIndustryType() {
-  const response = await fetch(API_ENDPOINTS.GET_INDUSTRY_TYPE, {
+  const response = await fetch(`${apiUrl}/organization/masters-saas/industry`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -215,7 +218,7 @@ export async function getIndustryType() {
 }
 
 export async function saveCompanyInfo(payload) {
-  const response = await fetch(API_ENDPOINTS.SAVE_COMPANY_INFO, {
+  const response = await fetch(`${apiUrl}/organization/enquiry-info`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -224,49 +227,41 @@ export async function saveCompanyInfo(payload) {
   });
 
   if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
+    throw new Error(`Error fetching data: ${response.statusText}`);
   }
 
-  const data = await response.json();
+  const data = await response.text();
   return data;
 }
 
 export async function saveHeadCountInfo(payload) {
-  const response = await fetch(API_ENDPOINTS.SAVE_HEAD_COUNT_INFO, {
+  const response = await fetch(`${apiUrl}/organization/calculate-pricing`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
   });
-
-  if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
-  }
-
-  const data = await response.json();
+  
+  const data = await response.text();
   return data;
 }
 
 export async function saveValidateInfo(payload) {
-  const response = await fetch(API_ENDPOINTS.SAVE_VALIDATE_INFO, {
+  const response = await fetch(`${apiUrl}/organization/validate-organization`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
   });
-
-  if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
-  }
 
   const data = await response.json();
   return data;
 }
 
 export async function disableMenuInfo(payload) {
-  const response = await fetch(API_ENDPOINTS.DISABLE_MENU_INFO, {
+  const response = await fetch(`${apiUrl}/organization/disable-menu-access`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -275,8 +270,21 @@ export async function disableMenuInfo(payload) {
   });
 
   if (!response.ok) {
-    throw new Error(`Error posting data: ${response.statusText}`);
+    throw new Error(`Error fetching data: ${response.statusText}`);
   }
+
+  const data = await response.text();
+  return data;
+}
+
+export async function validateOrganization(payload) {
+  const response = await fetch(`${apiUrl}/organization/validate-organization`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
   const data = await response.json();
   return data;

@@ -10,28 +10,28 @@
   z-index: var(--z-sticky);
   border-bottom: none;
   transition: all 0.3s ease;
-  
+
   @media (max-width: 768px) {
     padding: var(--spacing-sm) var(--spacing-md);
   }
-  
+
   &.scrolled {
     background-color: transparent;
     box-shadow: none;
     border-bottom: none;
-    
+
     .logo {
       opacity: 0;
       transform: translateX(-20px);
       transition: all 0.3s ease;
     }
-    
+
     .navLinks {
       opacity: 0;
       transform: translateY(-10px);
       transition: all 0.3s ease;
     }
-    
+
     .loginBtn {
       opacity: 1;
       transform: translateX(0);
@@ -49,11 +49,11 @@
   color: #000000;
   text-decoration: none;
   transition: all 0.3s ease;
-  
+
   &:hover {
     color: #F05A00;
   }
-  
+
   .logoIcon {
     width: 40px;
     height: 40px;
@@ -75,9 +75,9 @@
   margin: 0;
   padding: 0;
   transition: all 0.3s ease;
-  
+
   @media (max-width: 768px) {
-    display: none; // Hide on mobile - you can add a mobile menu later
+    display: none;
   }
 
   li {
@@ -97,15 +97,23 @@
       &.active {
         color: #F05A00;
         border-color: #F05A00;
-        // font-weight: 800;
       }
 
       &:hover {
         color: #F05A00;
         border-color: #F05A00;
-        // font-weight: 800;
       }
     }
+  }
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+
+  @media (max-width: 768px) {
+    gap: var(--spacing-lg);
   }
 }
 
@@ -123,63 +131,252 @@
   gap: var(--spacing-sm);
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-sm);
-  
+
   &:hover {
     background-color: #F05A00;
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
-  
+
   @media (max-width: 768px) {
-    padding: var(--spacing-xs) var(--spacing-md);
-    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm) var(--spacing-xl);
+    font-size: var(--font-size-base);
+    min-width: 80px;
+    height: 40px;
   }
 }
 
 .userIcon {
   font-size: var(--font-size-lg);
-  
+
   @media (max-width: 768px) {
     font-size: var(--font-size-base);
   }
 }
 
-// Mobile menu toggle (for future implementation)
+// Mobile menu toggle
 .mobileMenuToggle {
   display: none;
   flex-direction: column;
   cursor: pointer;
   padding: var(--spacing-xs);
-  
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+
   @media (max-width: 768px) {
     display: flex;
   }
-  
+
   span {
     width: 25px;
     height: 3px;
-    background-color: var(--text-primary);
-    margin: 3px 0;
-    transition: var(--transition-fast);
-    border-radius: var(--radius-sm);
+    background-color: #000000;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
   }
-  
+
   &.active {
     span:nth-child(1) {
       transform: rotate(-45deg) translate(-5px, 6px);
     }
-    
+
     span:nth-child(2) {
       opacity: 0;
     }
-    
+
     span:nth-child(3) {
       transform: rotate(45deg) translate(-5px, -6px);
     }
   }
 }
-  
+
+// Mobile Side Panel
+.mobileSidePanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &.open {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.mobileSidePanelOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.mobileSidePanelContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  max-width: 85vw;
+  height: 100%;
+  background-color: white;
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .mobileSidePanel.open & {
+    transform: translateX(0);
+  }
+
+  @media (max-width: 480px) {
+    width: 280px;
+    max-width: 90vw;
+  }
+
+  @media (max-width: 360px) {
+    width: 260px;
+    max-width: 95vw;
+  }
+}
+
+.mobileSidePanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid #e5e5e5;
+  flex-shrink: 0;
+  min-height: 60px;
+}
+
+.mobileLogo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.mobileCloseBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #000000;
+    transition: all 0.3s ease;
+
+    &:first-child {
+      transform: rotate(45deg);
+    }
+
+    &:last-child {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:hover span {
+    background-color: #F05A00;
+  }
+}
+
+.mobileNavLinks {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+
+  li {
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+
+    a {
+      text-decoration: none;
+      color: #000000;
+      display: block;
+      padding: var(--spacing-sm) 0;
+      transition: all 0.3s ease;
+
+      span {
+        padding-bottom: var(--spacing-xs);
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s ease;
+
+        &.active {
+          color: #F05A00;
+          border-color: #F05A00;
+        }
+      }
+
+      &:hover span {
+        color: #F05A00;
+        border-color: #F05A00;
+      }
+    }
+  }
+}
+
+.mobileLoginContainer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid #e5e5e5;
+  flex-shrink: 0;
+}
+
+.mobileLoginBtn {
+  width: 100%;
+  background-color: #1e58cd;
+  color: white;
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    background-color: #F05A00;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

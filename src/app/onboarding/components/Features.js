@@ -17,23 +17,23 @@ import {
   disableMenuInfo,
   paymentStatus,
 } from '../api_helpers';
-import { 
-  Card, 
-  Row, 
-  Col, 
-  Typography, 
-  Switch, 
-  Button, 
-  Tabs, 
-  Tag, 
+import {
+  Card,
+  Row,
+  Col,
+  Typography,
+  Switch,
+  Button,
+  Tabs,
+  Tag,
   Space,
   Divider,
-  Alert,
   Progress,
   Tooltip,
-  message
+  message,
+  Modal
 } from 'antd';
-import { 
+import {
   CheckCircleOutlined,
   DollarOutlined,
   StarOutlined,
@@ -43,28 +43,56 @@ import {
   ClockCircleOutlined,
   TrophyOutlined,
   FireOutlined,
-  CrownOutlined
+  CrownOutlined,
+  PhoneOutlined,
+  ExclamationCircleOutlined,
+  LoadingOutlined
 } from '@ant-design/icons';
+import { featureList, pricingTabs } from '@/app/constants';
+import ComplianceModal from './ComplianceModal';
 import styles from '../onboarding.module.scss';
 
 const { Title, Text, Paragraph } = Typography;
-const { TabPane } = Tabs;
-
-// Import feature images (you'll need to add these to your public folder)
-const flexiblePlanImg = '/assets/FBP.svg';
-const loansImg = '/assets/Loan & Advances.svg';
-const templateImg = '/assets/templates.svg';
-const workflowImg = '/assets/workflow.svg';
-const subContractorImg = '/assets/sub contract payroll (1).svg';
-const overtimeImg = '/assets/overtime 1.svg';
-const yellowWalletImg = '/assets/yellow wallet with money (1).svg';
-const complianceImg = '/assets/Compliance.svg';
 
 const Features = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { features, pricing, companyInfo } = useSelector((state) => state.onboarding);
+  const { features, pricing, companyInfo, loading } = useSelector((state) => state.onboarding);
   const [orgId, setOrgId] = useState('');
+  const [keyHolderName, setKeyHolderName] = useState('Valued Customer');
+  const [shouldShowPricingSummary, setShouldShowPricingSummary] = useState(true);
+  const [complianceModalVisible, setComplianceModalVisible] = useState(false);
+  const [paymentProcessingModalVisible, setPaymentProcessingModalVisible] = useState(false);
+  const [selectedCompliances, setSelectedCompliances] = useState({
+    isPF: false,
+    isESI: false,
+    isIT: false,
+    isPT: false,
+    isLW: false,
+    isMW: false
+  });
+
+
+  // Helper function to get icon for each feature
+  const getFeatureIcon = (featureKey) => {
+    const iconMap = {
+      'isFbp': <DollarOutlined />,
+      'isWorkFlow': <RocketOutlined />,
+      'isLoans': <SafetyCertificateOutlined />,
+      'isPF': <TeamOutlined />,
+      'isESI': <SafetyCertificateOutlined />,
+      'isMW': <ClockCircleOutlined />,
+      'isPT': <TrophyOutlined />,
+      'isIT': <FireOutlined />,
+      'isLW': <ClockCircleOutlined />,
+      'isPQ': <TeamOutlined />,
+      'isComp': <SafetyCertificateOutlined />,
+      'isTemp': <StarOutlined />,
+      'isSubCon': <CrownOutlined />,
+      'isOT': <ClockCircleOutlined />
+    };
+    return iconMap[featureKey] || <StarOutlined />;
+  };
 
   useEffect(() => {
     // Get orgId from localStorage or Redux state
@@ -82,6 +110,31 @@ const Features = () => {
       calculateAmounts(parseInt(storedHeadCountInfo));
     }
   }, [dispatch]);
+
+  // Enterprise logic - check company size
+  useEffect(() => {
+    const storedCompanyInfo = localStorage.getItem('CompanyInfo');
+    if (storedCompanyInfo) {
+      try {
+        const companyInfo = JSON.parse(storedCompanyInfo);
+
+        // Get keyholder name
+        if (companyInfo.keyholder_name) {
+          setKeyHolderName(companyInfo.keyholder_name);
+        }
+
+        // Calculate total employees
+        const taxableCount = Number(companyInfo.taxableCount ?? 0);
+        const nontaxablecount = Number(companyInfo.nontaxablecount ?? 0);
+        const total = taxableCount + nontaxablecount;
+
+        // Show pricing summary only for companies with 500 or fewer employees
+        setShouldShowPricingSummary(total <= 500);
+      } catch (error) {
+        console.error('Failed to parse company info:', error);
+      }
+    }
+  }, []);
 
   const calculateAmounts = (monthlyAmount) => {
     if (!monthlyAmount || isNaN(monthlyAmount)) return;
@@ -136,31 +189,96 @@ const Features = () => {
   };
 
   const handleSwitchChangeComp = () => {
-    dispatch(setFeatures({ isCompliancePlanActive: !features.isCompliancePlanActive }));
+    if (!features.isComp) {
+      // If compliance is not selected, show the modal
+      setComplianceModalVisible(true);
+    } else {
+      // If compliance is already selected, deselect it and clear all compliance features
+      dispatch(setFeatures({
+        isComp: false,
+        isPF: false,
+        isESI: false,
+        isIT: false,
+        isPT: false,
+        isLW: false,
+        isMW: false
+      }));
+      setSelectedCompliances({
+        isPF: false,
+        isESI: false,
+        isIT: false,
+        isPT: false,
+        isLW: false,
+        isMW: false
+      });
+    }
+  };
+
+  const handleComplianceModalConfirm = () => {
+    // Apply all selected compliances to the features state
+    const complianceUpdates = {};
+    Object.keys(selectedCompliances).forEach(key => {
+      complianceUpdates[key] = selectedCompliances[key];
+    });
+    complianceUpdates.isComp = true; // Enable the main compliance feature
+
+    dispatch(setFeatures(complianceUpdates));
+    setComplianceModalVisible(false);
+  };
+
+  const handleComplianceModalCancel = () => {
+    setComplianceModalVisible(false);
+    // Reset selected compliances to current state
+    setSelectedCompliances({
+      isPF: features.isPF || false,
+      isESI: features.isESI || false,
+      isIT: features.isIT || false,
+      isPT: features.isPT || false,
+      isLW: features.isLW || false,
+      isMW: features.isMW || false
+    });
+  };
+
+  // Initialize selected compliances when modal opens
+  useEffect(() => {
+    if (complianceModalVisible) {
+      setSelectedCompliances({
+        isPF: features.isPF || false,
+        isESI: features.isESI || false,
+        isIT: features.isIT || false,
+        isPT: features.isPT || false,
+        isLW: features.isLW || false,
+        isMW: features.isMW || false
+      });
+    }
+  }, [complianceModalVisible, features]);
+
+  const handleComplianceChange = (complianceKey, checked) => {
+    setSelectedCompliances(prev => ({
+      ...prev,
+      [complianceKey]: checked
+    }));
   };
 
   const totalAmount = () => {
-    const baseAmount = pricing.amounts?.monthlyAmount || 0;
-    let total = baseAmount;
-
-    // Add feature costs
-    if (features.isFbp) total += 500;
-    if (features.isWorkFlow) total += 300;
-    if (features.isLoans) total += 400;
-    if (features.isPF) total += 200;
-    if (features.isESI) total += 200;
-    if (features.isMW) total += 150;
-    if (features.isPT) total += 150;
-    if (features.isIT) total += 250;
-    if (features.isLW) total += 300;
-    if (features.isPQ) total += 200;
-    if (features.isComp) total += 350;
-    if (features.isTemp) total += 250;
-    if (features.isSubCon) total += 400;
-    if (features.isOT) total += 200;
-    if (features.isCompliancePlanActive) total += 600;
-
-    return total;
+    if (pricing.activeTab == "Monthly") {
+      return (
+        pricing.amounts?.monthlyAmount + addGst(pricing.amounts?.monthlyAmount || 0, 0.18)
+      ).toFixed(2);
+    } else if (pricing.activeTab == "Quarterly") {
+      return (
+        pricing.amounts?.quarterlyAmount + addGst(pricing.amounts?.quarterlyAmount || 0, 0.18)
+      ).toFixed(2);
+    } else if (pricing.activeTab == "Half Yearly") {
+      return (
+        pricing.amounts?.halfYearlyAmount + addGst(pricing.amounts?.halfYearlyAmount || 0, 0.18)
+      ).toFixed(2);
+    } else if (pricing.activeTab == "Annual") {
+      return (
+        pricing.amounts?.annualAmount + addGst(pricing.amounts?.annualAmount || 0, 0.18)
+      ).toFixed(2);
+    }
+    return "0.00"; // Default value if no tab is selected
   };
 
   const formatNumber = (input) => {
@@ -169,348 +287,525 @@ const Features = () => {
     return number.toLocaleString('en-IN');
   };
 
+
+
   const handleSubmit = async () => {
     try {
       dispatch(setLoading(true));
-      const total = totalAmount();
+      setPaymentProcessingModalVisible(true);
 
-      const paymentData = {
-        org_id: orgId,
-        amount: total,
-        features: features,
-        payment_method: 'online',
-        currency: 'INR',
+      // Get company info from localStorage
+      const storedCompanyInfo = localStorage.getItem('CompanyInfo');
+      const storedGeneralDetails = localStorage.getItem('GeneralDetails');
+
+      if (!storedCompanyInfo || !storedGeneralDetails) {
+        message.error('Company information not found. Please complete company details first.');
+        dispatch(setLoading(false));
+        setPaymentProcessingModalVisible(false);
+        return;
+      }
+
+      const companyInfo = JSON.parse(storedCompanyInfo);
+      const generalDetails = JSON.parse(storedGeneralDetails);
+
+      // Prepare data object with all features
+      const data = {
+        is_fbp: features.isFbp,
+        isWorkFlow: features.isWorkFlow,
+        isLoans: features.isLoans,
+        isPF: features.isPF,
+        isESI: features.isESI,
+        isMW: features.isMW,
+        isPT: features.isPT,
+        isIT: features.isIT,
+        isLW: features.isLW,
+        isPQ: features.isPQ,
+        isTemp: features.isTemp,
+        isOT: features.isOT,
+        isSubCon: features.isSubCon,
+        isComp: features.isComp,
+        totalAmount: parseFloat(totalAmount()),
+        plan: pricing.activeTab,
       };
 
-      const response = await confirmPayment(paymentData);
-      
-      if (response.success) {
-        dispatch(setFormData(paymentData));
-        
-        // Disable menu info
-        await disableMenuInfo({ org_id: orgId });
-        
-        // Check payment status
-        const checkPaymentStatus = async () => {
-          try {
-            const statusResponse = await paymentStatus({ org_id: orgId });
-            
-            if (statusResponse.status === 'success') {
-              dispatch(setLoading(false));
-              dispatch(setCurrentStep('paymentSuccess'));
-              message.success('Payment successful! Welcome to Ezii!');
-            } else if (statusResponse.status === 'failed') {
-              dispatch(setLoading(false));
-              dispatch(setCurrentStep('paymentFailure'));
-              message.error('Payment failed. Please try again.');
-            } else {
-              // Continue checking
-              setTimeout(checkPaymentStatus, 2000);
-            }
-          } catch (error) {
-            console.error('Error checking payment status:', error);
-            setTimeout(checkPaymentStatus, 2000);
-          }
-        };
+      // Store form data in localStorage
+      localStorage.setItem("formData", JSON.stringify(data));
 
-        checkPaymentStatus();
+      // Get profile details
+      const getProfileDetails = () => {
+        const profileDetails = localStorage.getItem("GeneralDetails");
+        return profileDetails ? JSON.parse(profileDetails) : {};
+      };
+
+      const profileDetails = getProfileDetails();
+
+      // Prepare payment payload
+      const payload = {
+        customer_details: {
+          customer_phone: profileDetails?.phoneNumber,
+          customer_email: profileDetails?.email,
+          customer_name: profileDetails?.keyholderName,
+        },
+        link_notify: {
+          send_sms: false,
+          send_email: false,
+        },
+        link_id: "",
+        link_amount: data.totalAmount,
+        link_currency: "INR",
+        link_purpose: "subscribe",
+      };
+
+      // Call confirm payment API
+      const response = await confirmPayment(payload);
+
+      if (response) {
+        const link_url = response.link_url;
+        const link_id = response.link_id;
+
+        if (link_url) {
+          window.open(link_url, "_blank");
+          message.success('Redirecting to payment page...');
+        }
+
+        if (link_id) {
+          const checkPaymentStatus = async () => {
+            try {
+              const payment_status = await paymentStatus(link_id);
+
+              if (
+                payment_status.link_status == "PAID" ||
+                payment_status.link_status == "FAILED"
+              ) {
+                setTimeout(() => clearInterval(intervalId));
+                dispatch(setLoading(false));
+                setPaymentProcessingModalVisible(false);
+              }
+
+              if (payment_status.link_status == "PAID") {
+                localStorage.setItem(
+                  "Payment Status",
+                  JSON.stringify(payment_status)
+                );
+
+                const storedPaymentInfoString = localStorage.getItem("PaymentInfo");
+
+                if (storedPaymentInfoString) {
+                  const storedPaymentInfo = JSON.parse(storedPaymentInfoString);
+                  // Use storedPaymentInfo here
+                } else {
+                  // Handle the case where PaymentInfo is not found in localStorage
+                }
+
+                localStorage.setItem("Link Id", JSON.stringify(link_id));
+
+                // Determine the disabled menu IDs based on selected features
+                const DisabledMenuIds = [];
+
+                if (!data.is_fbp) {
+                  DisabledMenuIds.push(
+                    58,
+                    59,
+                    60,
+                    116,
+                    117,
+                    119,
+                    120,
+                    555,
+                    556,
+                    557,
+                    559,
+                    560,
+                    558
+                  );
+                }
+                if (!data.isLoans) {
+                  DisabledMenuIds.push(78, 167, 168, 169, 170, 565, 566);
+                }
+                if (!data.isPQ) {
+                  DisabledMenuIds.push(25, 65, 108, 525, 526);
+                }
+                if (!data.isWorkFlow) {
+                  DisabledMenuIds.push(17, 50);
+                }
+                if (!data.isOT) {
+                  DisabledMenuIds.push(77);
+                }
+                if (!data.isTemp) {
+                  DisabledMenuIds.push(524);
+                }
+
+                const disableMenuPayload = {
+                  DisabledMenuIds,
+                  OrgId: orgId,
+                };
+
+                // Call disableMenuInfo API
+                try {
+                  await disableMenuInfo(disableMenuPayload);
+                  console.log("Menu settings updated successfully.");
+                } catch (error) {
+                  console.error("Error updating menu settings:", error);
+                }
+
+                message.success('Payment successful! Welcome to Ezii!');
+                dispatch(setCurrentStep('paymentSuccess'));
+                router.push("/paymentConfirmationSuccess");
+              }
+
+              if (payment_status.link_status == "FAILED") {
+                message.error('Payment failed. Please try again.');
+                dispatch(setCurrentStep('paymentFailure'));
+                router.push("/paymentConfirmationFailure");
+              }
+            } catch (error) {
+              dispatch(setLoading(false));
+              setPaymentProcessingModalVisible(false);
+              console.error("Error checking payment status:", error);
+            }
+          };
+
+          const intervalId = setInterval(checkPaymentStatus, 10000);
+        } else {
+          console.error("link_id is missing in the response");
+          message.error('Payment link not received from server');
+          setPaymentProcessingModalVisible(false);
+        }
       } else {
-        dispatch(setLoading(false));
-        message.error('Payment initiation failed. Please try again.');
+        console.error("Response is undefined");
+        message.error('Payment link not received from server');
+        setPaymentProcessingModalVisible(false);
       }
+
+      dispatch(setLoading(false));
     } catch (error) {
       dispatch(setLoading(false));
-      console.error('Error processing payment:', error);
+      setPaymentProcessingModalVisible(false);
+      console.error("Error during payment confirmation or status check:", error);
       message.error('An error occurred. Please try again.');
     }
   };
 
-  const featureList = [
-    {
-      key: 'isFbp',
-      name: 'Flexible Benefit Plan',
-      description: 'Customize employee benefits with flexible spending accounts',
-      icon: <DollarOutlined />,
-      price: 500,
-      image: flexiblePlanImg,
-      popular: true
-    },
-    {
-      key: 'isWorkFlow',
-      name: 'Workflow Management',
-      description: 'Streamline approval processes with automated workflows',
-      icon: <RocketOutlined />,
-      price: 300,
-      image: workflowImg
-    },
-    {
-      key: 'isLoans',
-      name: 'Loan & Advances',
-      description: 'Manage employee loans and advance payments efficiently',
-      icon: <SafetyCertificateOutlined />,
-      price: 400,
-      image: loansImg
-    },
-    {
-      key: 'isPF',
-      name: 'PF Management',
-      description: 'Automated Provident Fund calculations and compliance',
-      icon: <TeamOutlined />,
-      price: 200,
-      image: yellowWalletImg
-    },
-    {
-      key: 'isESI',
-      name: 'ESI Management',
-      description: 'Employee State Insurance calculations and reporting',
-      icon: <SafetyCertificateOutlined />,
-      price: 200,
-      image: yellowWalletImg
-    },
-    {
-      key: 'isMW',
-      name: 'Minimum Wages',
-      description: 'Ensure compliance with minimum wage regulations',
-      icon: <ClockCircleOutlined />,
-      price: 150,
-      image: yellowWalletImg
-    },
-    {
-      key: 'isPT',
-      name: 'Professional Tax',
-      description: 'Automated professional tax calculations',
-      icon: <TrophyOutlined />,
-      price: 150,
-      image: yellowWalletImg
-    },
-    {
-      key: 'isIT',
-      name: 'Income Tax',
-      description: 'Income tax calculations and TDS management',
-      icon: <FireOutlined />,
-      price: 250,
-      image: yellowWalletImg
-    },
-    {
-      key: 'isLW',
-      name: 'Leave Management',
-      description: 'Comprehensive leave tracking and management',
-      icon: <ClockCircleOutlined />,
-      price: 300,
-      image: yellowWalletImg
-    },
-    {
-      key: 'isPQ',
-      name: 'Payroll Queries',
-      description: 'Handle employee payroll queries efficiently',
-      icon: <TeamOutlined />,
-      price: 200,
-      image: yellowWalletImg
-    },
-    {
-      key: 'isComp',
-      name: 'Compliance',
-      description: 'Stay compliant with all labor laws and regulations',
-      icon: <SafetyCertificateOutlined />,
-      price: 350,
-      image: complianceImg
-    },
-    {
-      key: 'isTemp',
-      name: 'Templates',
-      description: 'Pre-built templates for various payroll documents',
-      icon: <StarOutlined />,
-      price: 250,
-      image: templateImg
-    },
-    {
-      key: 'isSubCon',
-      name: 'Sub-contractor Payroll',
-      description: 'Manage sub-contractor payments and compliance',
-      icon: <CrownOutlined />,
-      price: 400,
-      image: subContractorImg
-    },
-    {
-      key: 'isOT',
-      name: 'Overtime Management',
-      description: 'Track and calculate overtime payments',
-      icon: <ClockCircleOutlined />,
-      price: 200,
-      image: overtimeImg
-    }
-  ];
-
-  const pricingTabs = [
-    { key: 'Monthly', label: 'Monthly', discount: 0 },
-    { key: 'Quarterly', label: 'Quarterly', discount: 2 },
-    { key: 'Half Yearly', label: 'Half Yearly', discount: 5 },
-    { key: 'Annual', label: 'Annual', discount: 8 }
-  ];
-
   return (
-    <div className={styles.featuresContainer}>
-      <Card className={styles.featuresCard}>
-        <div className={styles.featuresHeader}>
-          <Title level={2} className={styles.featuresTitle}>
-            <RocketOutlined className={styles.featuresIcon} />
-            Choose Your Features
-          </Title>
-          <Text type="secondary" className={styles.featuresSubtitle}>
-            Select the features that best suit your organization's needs
-          </Text>
-        </div>
+    <div className={styles.modernFeaturesContainer}>
+      <div className={styles.modernFeaturesHeader}>
+        <Title level={3} className={styles.modernFeaturesTitle}>
+          <RocketOutlined className={styles.modernFeaturesIcon} />
+          Choose Your Features
+        </Title>
+        <Text type="secondary" className={styles.modernFeaturesSubtitle}>
+          Select the features that best suit your organization's needs
+        </Text>
+      </div>
 
-        <Divider />
-
-        <Row gutter={[24, 24]}>
+      {shouldShowPricingSummary ? (
+        <Row gutter={[20, 20]}>
           {/* Features Selection */}
           <Col xs={24} lg={16}>
-            <Card title="Available Features" className={styles.featuresListCard}>
-              <Row gutter={[16, 16]}>
+            <Card title="Available Features" className={styles.modernFeaturesListCard}>
+              <Row gutter={[12, 12]}>
                 {featureList.map((feature) => (
-                  <Col xs={24} sm={12} key={feature.key}>
-                    <Card 
-                      className={`${styles.featureCard} ${features[feature.key] ? styles.featureCardActive : ''}`}
+                  <Col xs={24} sm={12} md={8} key={feature.key}>
+                    <Card
+                      className={`${styles.modernFeatureCard} ${features[feature.key] ? styles.modernFeatureCardActive : ''}`}
                       hoverable
+                      size="small"
                     >
-                      <div className={styles.featureHeader}>
-                        <div className={styles.featureIcon}>
-                          {feature.icon}
+                      {/* Header: Logo and Title side by side */}
+                      <div className={styles.modernFeatureHeader}>
+                        <div className={styles.modernFeatureIcon}>
+                          {getFeatureIcon(feature.key)}
                         </div>
-                        <div className={styles.featureInfo}>
-                          <Title level={5} className={styles.featureName}>
+                        <div className={styles.modernFeatureInfo}>
+                          <Title level={5} className={styles.modernFeatureName}>
                             {feature.name}
                             {feature.popular && (
-                              <Tag color="gold" className={styles.popularTag}>
+                              <Tag color="gold" className={styles.modernPopularTag}>
                                 Popular
                               </Tag>
                             )}
                           </Title>
-                          <Text type="secondary" className={styles.featureDescription}>
-                            {feature.description}
-                          </Text>
                         </div>
                       </div>
-                      
-                      <div className={styles.featureFooter}>
-                        <Text strong className={styles.featurePrice}>
-                          ₹{feature.price}/month
+
+                      {/* Content: Description below header */}
+                      <div className={styles.modernFeatureContent}>
+                        <Text type="secondary" className={styles.modernFeatureDescription}>
+                          {feature.description}
+                        </Text>
+                      </div>
+
+                      {/* Footer: Price and Button */}
+                      <div className={styles.modernFeatureFooter}>
+                        <Text strong className={styles.modernFeaturePrice}>
+                          {feature.key === 'isComp' ? 'Select Features' : 'Free'}
                         </Text>
                         <Switch
                           checked={features[feature.key]}
-                          onChange={handleSwitchChange(feature.key)}
-                          className={styles.featureSwitch}
+                          onChange={feature.key === 'isComp' ? handleSwitchChangeComp : handleSwitchChange(feature.key)}
+                          className={styles.modernFeatureSwitch}
                         />
                       </div>
                     </Card>
                   </Col>
                 ))}
               </Row>
-
-              {/* Compliance Plan */}
-              <Divider />
-              <Card className={styles.complianceCard}>
-                <div className={styles.complianceHeader}>
-                  <div className={styles.complianceIcon}>
-                    <CrownOutlined />
-                  </div>
-                  <div className={styles.complianceInfo}>
-                    <Title level={4} className={styles.complianceTitle}>
-                      Compliance Plan
-                      <Tag color="purple" className={styles.premiumTag}>
-                        Premium
-                      </Tag>
-                    </Title>
-                    <Text type="secondary">
-                      Comprehensive compliance management with expert support
-                    </Text>
-                  </div>
-                </div>
-                <div className={styles.complianceFooter}>
-                  <Text strong className={styles.compliancePrice}>
-                    ₹600/month
-                  </Text>
-                  <Switch
-                    checked={features.isCompliancePlanActive}
-                    onChange={handleSwitchChangeComp}
-                    className={styles.complianceSwitch}
-                  />
-                </div>
-              </Card>
             </Card>
           </Col>
 
           {/* Pricing Summary */}
           <Col xs={24} lg={8}>
-            <Card title="Pricing Summary" className={styles.pricingCard}>
-              <div className={styles.pricingTabs}>
-                <Tabs 
-                  activeKey={pricing.activeTab} 
+            <Card title="Pricing Summary" className={styles.modernPricingCard} size="small">
+              <div className={styles.modernPricingTabs}>
+                <Tabs
+                  activeKey={pricing.activeTab}
                   onChange={handleTabClick}
-                  className={styles.pricingTabsComponent}
-                >
-                  {pricingTabs.map((tab) => (
-                    <TabPane 
-                      tab={
-                        <div className={styles.pricingTab}>
-                          <div>{tab.label}</div>
+                  className={styles.modernPricingTabsComponent}
+                  size="small"
+                  items={pricingTabs.map((tab) => ({
+                    key: tab.key,
+                    label: (
+                      <div className={styles.modernPricingTab}>
+                        <div className={styles.modernTabLabel}>{tab.label}</div>
+                        <div className={styles.modernPricingTabTags}>
                           {tab.discount > 0 && (
                             <Tag color="green" size="small">
-                              {tab.discount}% OFF
+                              {tab.discount}% Off
+                            </Tag>
+                          )}
+                          {tab.popular && (
+                            <Tag color="gold" size="small" className={styles.modernPopularTag}>
+                              Popular
                             </Tag>
                           )}
                         </div>
-                      } 
-                      key={tab.key}
-                    />
-                  ))}
-                </Tabs>
+
+                        <div className={styles.modernTabAmount}>
+                          ₹{formatNumber(
+                            tab.key === 'Monthly' ? (pricing.amounts?.monthlyAmount || 0) :
+                              tab.key === 'Quarterly' ? (pricing.amounts?.quarterlyAmount || 0) :
+                                tab.key === 'Half Yearly' ? (pricing.amounts?.halfYearlyAmount || 0) :
+                                  (pricing.amounts?.annualAmount || 0)
+                          )}
+                        </div>
+
+                      </div>
+                    ),
+                    children: null
+                  }))}
+                />
               </div>
 
-              <div className={styles.pricingSummary}>
-                <div className={styles.basePrice}>
+              <div className={styles.modernPricingSummary}>
+                <div className={styles.modernBasePrice}>
                   <Text>Base Price:</Text>
-                  <Text strong>₹{formatNumber(pricing.amounts?.monthlyAmount || 0)}</Text>
-                </div>
-                
-                <div className={styles.featuresPrice}>
-                  <Text>Selected Features:</Text>
-                  <Text strong>₹{formatNumber(totalAmount() - (pricing.amounts?.monthlyAmount || 0))}</Text>
+                  <Text strong>₹{formatNumber(
+                    pricing.activeTab === 'Monthly' ? (pricing.amounts?.monthlyAmount || 0) :
+                      pricing.activeTab === 'Quarterly' ? (pricing.amounts?.quarterlyAmount || 0) :
+                        pricing.activeTab === 'Half Yearly' ? (pricing.amounts?.halfYearlyAmount || 0) :
+                          (pricing.amounts?.annualAmount || 0)
+                  )}</Text>
                 </div>
 
-                <Divider />
+                <div className={styles.modernGstPrice}>
+                  <Text>GST 18%:</Text>
+                  <Text strong>₹{formatNumber(
+                    pricing.activeTab === 'Monthly' ? (pricing.amounts?.monthlyAmount || 0) * 0.18 :
+                      pricing.activeTab === 'Quarterly' ? (pricing.amounts?.quarterlyAmount || 0) * 0.18 :
+                        pricing.activeTab === 'Half Yearly' ? (pricing.amounts?.halfYearlyAmount || 0) * 0.18 :
+                          (pricing.amounts?.annualAmount || 0) * 0.18
+                  )}</Text>
+                </div>
 
-                <div className={styles.totalPrice}>
+                {/* Selected Features List */}
+                <div className={styles.modernSelectedFeaturesSection}>
+                  <div className={styles.modernSelectedFeaturesHeader}>
+                    <Text strong className={styles.modernSelectedFeaturesTitle}>
+                      Selected Features
+                    </Text>
+                    <Text type="secondary" className={styles.modernSelectedFeaturesCount}>
+                      {Object.values(features).filter(Boolean).length} features selected
+                    </Text>
+                  </div>
+                  <div className={styles.modernSelectedFeaturesList}>
+                    {Object.entries(features).map(([key, isSelected]) => {
+                      if (!isSelected) return null;
+
+                      const feature = featureList.find(f => f.key === key);
+                      if (!feature) return null;
+
+                      return (
+                        <Tag
+                          key={key}
+                          color="blue"
+                          className={styles.modernSelectedFeatureTag}
+                        >
+                          {feature.name}
+                        </Tag>
+                      );
+                    })}
+
+                    {/* Show compliance features when compliance is selected */}
+                    {features.isComp && (
+                      <>
+                        {features.isPF && (
+                          <Tag color="purple" className={styles.modernSelectedFeatureTag}>
+                            Provident Fund
+                          </Tag>
+                        )}
+                        {features.isESI && (
+                          <Tag color="purple" className={styles.modernSelectedFeatureTag}>
+                            ESI
+                          </Tag>
+                        )}
+                        {features.isIT && (
+                          <Tag color="purple" className={styles.modernSelectedFeatureTag}>
+                            Income Tax
+                          </Tag>
+                        )}
+                        {features.isPT && (
+                          <Tag color="purple" className={styles.modernSelectedFeatureTag}>
+                            Professional Tax
+                          </Tag>
+                        )}
+                        {features.isLW && (
+                          <Tag color="purple" className={styles.modernSelectedFeatureTag}>
+                            Labour Welfare Act
+                          </Tag>
+                        )}
+                        {features.isMW && (
+                          <Tag color="purple" className={styles.modernSelectedFeatureTag}>
+                            Minimum Wages
+                          </Tag>
+                        )}
+                      </>
+                    )}
+
+                    {Object.values(features).filter(Boolean).length === 0 && (
+                      <Text type="secondary" className={styles.modernNoFeaturesSelected}>
+                        No features selected
+                      </Text>
+                    )}
+                  </div>
+                </div>
+
+                <Divider className={styles.modernDivider} />
+
+                <div className={styles.modernTotalPrice}>
                   <Title level={4}>Total Amount</Title>
-                  <Title level={3} className={styles.totalAmount}>
-                    ₹{formatNumber(totalAmount())}
+                  <Title level={3} className={styles.modernTotalAmount}>
+                    ₹{formatNumber(
+                      (pricing.activeTab === 'Monthly' ? (pricing.amounts?.monthlyAmount || 0) :
+                        pricing.activeTab === 'Quarterly' ? (pricing.amounts?.quarterlyAmount || 0) :
+                          pricing.activeTab === 'Half Yearly' ? (pricing.amounts?.halfYearlyAmount || 0) :
+                            (pricing.amounts?.annualAmount || 0)) * 1.18
+                    )}
                   </Title>
                 </div>
-
-                <Alert
-                  message="Selected Features"
-                  description={`${Object.values(features).filter(Boolean).length} features selected`}
-                  type="info"
-                  showIcon
-                  className={styles.featuresAlert}
-                />
 
                 <Button
                   type="primary"
                   size="large"
                   onClick={handleSubmit}
-                  className={styles.proceedButton}
+                  className={styles.modernProceedButton}
                   icon={<CheckCircleOutlined />}
                   block
+                  loading={loading}
+                  disabled={loading || paymentProcessingModalVisible}
                 >
-                  Proceed to Payment
+                  make payment
                 </Button>
               </div>
             </Card>
           </Col>
         </Row>
-      </Card>
+      ) : (
+        <Card className={styles.modernEnterpriseMessage}>
+          <Title level={3} className={styles.modernEnterpriseTitle}>
+            Dear {keyHolderName},
+          </Title>
+          <Text className={styles.modernEnterpriseText}>
+            We understand that managing a large enterprise like yours comes with its own set of complex challenges,
+            particularly when it comes to payroll, compliance, and organizational efficiency.
+          </Text>
+          <Text className={styles.modernEnterpriseText}>
+            Your organization's unique needs require tailored solutions. We would love to learn more about the
+            specific pain points you were facing in these areas.
+          </Text>
+          <Text className={styles.modernEnterpriseText}>
+            Our Payroll Customer team is ready to discuss your requirements and explore how we can provide a
+            customized solution to address your enterprise's specific needs.
+          </Text>
+          <Text className={styles.modernEnterpriseText}>
+            Would you be available for a brief call to discuss and take this further?
+          </Text>
+          <Text className={styles.modernEnterpriseText}>
+            Best regards,<br />
+            Resolvepay Team
+          </Text>
+
+          <div className={styles.modernEnterpriseActions}>
+            <Button
+              type="primary"
+              size="large"
+              className={styles.modernContactSalesButton}
+              icon={<PhoneOutlined />}
+              onClick={() => {
+                window.open('mailto:sales@resolvepay.in?subject=Enterprise%20Inquiry', '_blank');
+              }}
+            >
+              Contact Sales Team
+            </Button>
+          </div>
+        </Card>
+      )}
+
+      {/* Payment Processing Modal */}
+      <Modal
+        title={
+          <div className={styles.paymentProcessingModalTitle}>
+            <ExclamationCircleOutlined className={styles.paymentProcessingModalIcon} />
+            <span>Payment Processing</span>
+          </div>
+        }
+        open={paymentProcessingModalVisible}
+        footer={null}
+        closable={false}
+        maskClosable={false}
+        width={500}
+        className={styles.paymentProcessingModal}
+      >
+        <div className={styles.paymentProcessingModalContent}>
+          <div className={styles.paymentProcessingIcon}>
+            <LoadingOutlined style={{ fontSize: '48px', color: '#1890ff' }} />
+          </div>
+
+          <Title level={4} className={styles.paymentProcessingTitle}>
+            Please Don't Refresh or Go Back
+          </Title>
+
+          <Text className={styles.paymentProcessingDescription}>
+            Your payment is being processed. Please wait while we complete your transaction.
+            Do not refresh the page or navigate away from this page until the process is complete.
+          </Text>
+
+          <div className={styles.paymentProcessingWarning}>
+            <ExclamationCircleOutlined className={styles.paymentProcessingWarningIcon} />
+            <Text strong className={styles.paymentProcessingWarningText}>
+              Important: Closing this page may interrupt your payment process
+            </Text>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Compliance Modal */}
+      <ComplianceModal
+        visible={complianceModalVisible}
+        onCancel={handleComplianceModalCancel}
+        onConfirm={handleComplianceModalConfirm}
+        selectedCompliances={selectedCompliances}
+        onComplianceChange={handleComplianceChange}
+      />
     </div>
   );
 };

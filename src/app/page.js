@@ -2,7 +2,6 @@ import Navbar from '@/app/coomponents/Navbar';
 import HeroSection from '@/app/coomponents/HeroSection';
 import ProblemSolutionSection from '@/app/coomponents/ProblemSolutionSection';
 import EziiOverviewSection from '@/app/coomponents/EziiOverviewSection';
-import FeaturesSection from '@/app/coomponents/FeaturesSection';
 import styles from './home.module.scss';
 
 export default function HomePage() {
@@ -13,8 +12,7 @@ export default function HomePage() {
       <main className={styles.main}>
         <HeroSection />
         {/* <ProblemSolutionSection />
-        <EziiOverviewSection />
-        <FeaturesSection /> */}
+        <EziiOverviewSection /> */}
       </main>
     </>
   );

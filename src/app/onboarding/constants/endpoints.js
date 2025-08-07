@@ -1,4 +1,4 @@
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.ezii.com';
+const apiUrl = 'https://dev-api.resolveindia.com';
 
 export const API_ENDPOINTS = {
   // Payment endpoints
@@ -15,10 +15,11 @@ export const API_ENDPOINTS = {
   SAVE_HEAD_COUNT_INFO: `${apiUrl}/organization/headcount-info`,
   SAVE_VALIDATE_INFO: `${apiUrl}/organization/validate-info`,
   DISABLE_MENU_INFO: `${apiUrl}/organization/disable-menu`,
+  VALIDATE_ORGANIZATION: `${apiUrl}/organization/validate-organization`,
   
   // Business type and industry endpoints
-  GET_BUSINESS_TYPE: `${apiUrl}/organization/business-type`,
-  GET_INDUSTRY_TYPE: `${apiUrl}/organization/industry-type`,
+  GET_BUSINESS_TYPE: `${apiUrl}/organization/masters-saas/type`,
+  GET_INDUSTRY_TYPE: `${apiUrl}/organization/masters-saas/industry`,
   
   // Document endpoints
   SAVE_PAN: `${apiUrl}/organization/save-pan`,
