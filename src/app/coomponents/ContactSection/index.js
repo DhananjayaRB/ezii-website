@@ -164,60 +164,54 @@ export default function ContactSection({
     // Call parent onSubmit if provided
     if (onSubmit) {
       onSubmit(formData);
-    } else {
-      console.log('No onSubmit handler provided');
     }
+    // No onSubmit handler provided
   };
 
   const renderContactIcon = (iconType) => {
     const iconStyle = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '40px',
-      height: '40px',
-      borderRadius: '0.5rem',
-      flexShrink: 0
+      fontSize: '18px',
+      color: '#ffffff'
     };
 
     switch (iconType) {
       case 'email':
-        return (
-          <div style={iconStyle}>
-            <MailOutlined style={{ fontSize: '20px', color: '#667eea' }} />
-          </div>
-        );
+        return <MailOutlined style={iconStyle} />;
       case 'phone':
-        return (
-          <div style={iconStyle}>
-            <PhoneOutlined style={{ fontSize: '20px', color: '#667eea' }} />
-          </div>
-        );
+        return <PhoneOutlined style={iconStyle} />;
       case 'location':
-        return (
-          <div style={iconStyle}>
-            <EnvironmentOutlined style={{ fontSize: '20px', color: '#667eea' }} />
-          </div>
-        );
+        return <EnvironmentOutlined style={iconStyle} />;
       default:
         return null;
     }
   };
 
   const renderFormField = (field) => {
-    const { name, type, placeholder, isRequired, options, minLength } = field;
+    const { name, type, placeholder, isRequired, options, minLength, label } = field;
     const value = formData[name];
     const error = errors[name];
+    const isDescriptionField = name === 'description' || name === 'brief' || name === 'message';
+
+    const renderLabel = () => {
+      if (!label) return null;
+      return (
+        <label className={styles.formLabel}>
+          {label}
+          {isRequired && <span className={styles.requiredAsterisk}> *</span>}
+        </label>
+      );
+    };
 
     switch (type) {
       case 'select':
         return (
-          <div className={styles.formGroup} key={name}>
+          <div key={name} className={isDescriptionField ? styles.fullWidth : ''}>
+            {renderLabel()}
             <select
               name={name}
               value={value}
               onChange={(e) => handleInputChange(name, e.target.value)}
-              className={styles.formSelect}
+              className={`${styles.formSelect} ${isDescriptionField ? styles.fullWidth : ''}`}
               required={isRequired}
             >
               {options.map((option, index) => (
@@ -231,7 +225,8 @@ export default function ContactSection({
 
       case 'textarea':
         return (
-          <div className={styles.formGroup} key={name}>
+          <div key={name} className={isDescriptionField ? styles.fullWidth : ''}>
+            {renderLabel()}
             <textarea
               name={name}
               placeholder={placeholder}
@@ -242,13 +237,13 @@ export default function ContactSection({
               rows="4"
               required={isRequired}
             />
-            {error && <div className={styles.errorMessage}>{error}</div>}
           </div>
         );
 
       default:
         return (
-          <div className={styles.formGroup} key={name}>
+          <div key={name} className={isDescriptionField ? styles.fullWidth : ''}>
+            {renderLabel()}
             <input
               type={type}
               name={name}
@@ -260,73 +255,63 @@ export default function ContactSection({
               maxLength={type === 'tel' ? "10" : undefined}
               required={isRequired}
             />
-            {type === 'tel' && (
-              <div className={styles.charCount}>
-                {(charCount[name] || 0)} of 10 max characters.
-              </div>
-            )}
-            {error && <div className={styles.errorMessage}>{error}</div>}
           </div>
         );
     }
   };
 
   return (
-    <section id="contact" className={styles.contactSection}>
-      <div className={styles.container}>
-        <div className={showContactInfo ? styles.contactGrid : styles.contactFlex}>
-          {/* Left Section - Contact Information */}
-          {showContactInfo && (
-            <div className={styles.contactInfo}>
-              <h2 className={styles.mainHeading}>{contactInfo.title}</h2>
-              <p className={styles.description}>
-                {contactInfo.description}
-              </p>
+    <section id="contact" className={`${styles.contactSection} ${showContactInfo ? styles.contactGrid : styles.contactFlex}`}>
+      {/* Left Section - Contact Information */}
+      {showContactInfo && (
+        <div className={styles.contactInfo}>
+          <h2 className={styles.mainHeading}>{contactInfo.title}</h2>
+          <p className={styles.description}>
+            {contactInfo.description}
+          </p>
 
-              <div className={styles.contactDetails}>
-                {contactInfo.contactDetails.map((contact, index) => (
-                  <div className={styles.contactItem} key={index}>
-                    <div className={styles.contactIcon}>
-                      {renderContactIcon(contact.icon)}
-                    </div>
-                    <span
-                      className={styles.contactText}
-                      dangerouslySetInnerHTML={{ __html: contact.text }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Right Section - Contact Form */}
-          <div className={styles.contactForm}>
-            <form onSubmit={handleSubmit}>
-              {formFields.map(renderFormField)}
-
-              <div className={styles.buttonContainer}>
-                <Button
-                  type="submit"
-                  variant="black"
-                  size="large"
-                  disabled={externalIsSubmitting}
-                >
-                  {externalIsSubmitting ? 'Submitting...' : 'Submit'}
-                </Button>
-              </div>
-              {submitSuccess && (
-                <div className={`${styles.submitStatus} ${styles.submitSuccess}`}>
-                  Thank you! Your message has been submitted successfully.
+          <div className={styles.contactDetails}>
+            {contactInfo.contactDetails.map((contact, index) => (
+              <div className={styles.contactItem} key={index}>
+                <div className={styles.contactIcon}>
+                  {renderContactIcon(contact.icon)}
                 </div>
-              )}
-              {submitError && (
-                <div className={`${styles.submitStatus} ${styles.submitError}`}>
-                  {submitError}
-                </div>
-              )}
-            </form>
+                <span
+                  className={styles.contactText}
+                  dangerouslySetInnerHTML={{ __html: contact.text }}
+                />
+              </div>
+            ))}
           </div>
         </div>
+      )}
+
+      {/* Right Section - Contact Form */}
+      <div className={styles.contactForm}>
+        <form onSubmit={handleSubmit}>
+          {formFields.map(renderFormField)}
+
+          <div className={styles.buttonContainer}>
+            <Button
+              type="submit"
+              variant="black"
+              size="compact"
+              disabled={externalIsSubmitting}
+            >
+              {externalIsSubmitting ? 'Submitting...' : 'Submit'}
+            </Button>
+          </div>
+          {submitSuccess && (
+            <div className={`${styles.submitStatus} ${styles.submitSuccess}`}>
+              Thank you! Your message has been submitted successfully.
+            </div>
+          )}
+          {submitError && (
+            <div className={`${styles.submitStatus} ${styles.submitError}`}>
+              {submitError}
+            </div>
+          )}
+        </form>
       </div>
     </section>
   );

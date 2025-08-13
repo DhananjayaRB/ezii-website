@@ -9,7 +9,7 @@
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -26,4 +26,4 @@
   position: relative;
   z-index: 2;
   min-height: 100vh;
-} 
+}

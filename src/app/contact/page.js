@@ -2,6 +2,33 @@ import Navbar from '@/app/coomponents/Navbar';
 import Footer from '@/app/coomponents/Footer';
 import styles from './contact.module.scss';
 import ContactForm from '../coomponents/ContactForm';
+import HeaderWithImage from '@/app/coomponents/HeaderWithImage';
+
+// Page-specific metadata for SEO
+export const metadata = {
+  title: 'Contact EZII - Get in Touch for Payroll Solutions',
+  description: 'Contact EZII for expert payroll and HR solutions. Our team is ready to help you streamline your payroll processes and ensure compliance.',
+  keywords: 'contact EZII, payroll support, HR consultation, EZII contact, payroll help, customer support',
+  openGraph: {
+    title: 'Contact EZII - Get in Touch for Payroll Solutions',
+    description: 'Get expert help with your payroll and HR needs. Contact our team today.',
+    url: 'https://ezii-website.vercel.app/contact',
+    type: 'website',
+    images: [
+      {
+        url: 'https://ezii-website.vercel.app/assets/banner-ezii.webp',
+        width: 1035,
+        height: 695,
+        alt: 'Contact EZII - Get in Touch for Payroll Solutions',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact EZII - Get in Touch for Payroll Solutions',
+    description: 'Get expert help with your payroll and HR needs. Contact our team today.',
+  },
+};
 
 export default function ContactPage() {
   return (
@@ -9,13 +36,15 @@ export default function ContactPage() {
       <Navbar />
       <div className={styles.backgroundImage}></div>
       <main className={styles.main}>
-        <div className={styles.heroSection}>
-          <div className={styles.illustration}>
-            <img src="/assets/contact/pricing-1.webp" alt="Pricing illustration" className={styles.illustrationImage} />
-          </div>
-          <h1 className={styles.title}>Contact Us</h1>
-          <p className={styles.tagline}>Leave the hassle of payroll to us – We help you get it right</p>
-        </div>
+        {/* <div className={styles.heroSection}>
+          <HeaderWithImage
+            imageSrc="/assets/contact/pricing-1.webp"
+            imageAlt="Contact Us"
+            title="Contact Us"
+            description="Leave the hassle of payroll to us – We help you get it right"
+            applyPurpleHue
+          />
+        </div> */}
         <ContactForm />
       </main>
       <Footer />

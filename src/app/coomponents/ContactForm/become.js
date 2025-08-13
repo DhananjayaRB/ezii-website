@@ -38,7 +38,7 @@ export default function BecomeContactForm({ showLocation = true }) {
 
       // Submit form data to API
       const result = await apiHelper.submitContactForm(formData);
-      
+
       if (result.success) {
         setSubmitSuccess(true);
         // Reset form data after successful submission
@@ -51,16 +51,16 @@ export default function BecomeContactForm({ showLocation = true }) {
           designation: '',
           description: ''
         });
-        
+
         // Reset success message after 5 seconds
         setTimeout(() => {
           setSubmitSuccess(false);
         }, 5000);
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      // Error submitting form
       setSubmitError('Failed to submit form. Please try again.');
-      
+
       // Clear error message after 5 seconds
       setTimeout(() => {
         setSubmitError('');
@@ -108,7 +108,7 @@ export default function BecomeContactForm({ showLocation = true }) {
         </div>
       )}
 
-      <ContactSection 
+      <ContactSection
         formFields={contactFormFieldsForBecomePartnerPage}
         onChange={handleContactFormChange}
         onSubmit={handleContactFormSubmit}

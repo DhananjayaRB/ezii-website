@@ -1,4 +1,5 @@
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://dev-api.resolveindia.com';
+// const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://dev-api.resolveindia.com';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://apiv1.resolvepay.in';
 
 export async function confirmPayment(payload) {
   const response = await fetch(`${apiUrl}/organization/confirm-payment`, {
@@ -242,7 +243,7 @@ export async function saveHeadCountInfo(payload) {
     },
     body: JSON.stringify(payload),
   });
-  
+
   const data = await response.text();
   return data;
 }

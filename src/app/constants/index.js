@@ -3,32 +3,37 @@ export const contactFormFieldsForHomePage = [
   {
     name: 'name',
     type: 'text',
-    placeholder: 'Name',
+    label: 'Full Name',
+    placeholder: 'Bittu Kumar',
     isRequired: true,
     minLength: 2
   },
   {
     name: 'email',
     type: 'email',
-    placeholder: 'Email Address',
+    label: 'Email Address',
+    placeholder: 'bittu@company.com',
     isRequired: true
   },
   {
     name: 'phone',
     type: 'tel',
-    placeholder: 'Mobile Number',
+    label: 'Mobile Number',
+    placeholder: '9876543210',
     isRequired: true
   },
   {
     name: 'companyName',
     type: 'text',
-    placeholder: 'Company Name',
+    label: 'Company Name',
+    placeholder: 'ABC Tech Pvt Ltd',
     isRequired: true,
     minLength: 2
   },
   {
     name: 'service',
     type: 'select',
+    label: 'Service Required',
     placeholder: 'Select Service',
     isRequired: true,
     options: ['Payroll Management'] // Default option, will be replaced by API
@@ -36,14 +41,16 @@ export const contactFormFieldsForHomePage = [
   {
     name: 'designation',
     type: 'text',
-    placeholder: 'Designation (Optional)',
+    label: 'Designation',
+    placeholder: 'HR Manager',
     isRequired: false,
     minLength: 2
   },
   {
     name: 'description',
     type: 'textarea',
-    placeholder: 'Brief Description (Optional)',
+    label: 'Brief Description',
+    placeholder: 'Description (Optional)',
     isRequired: false,
     minLength: 10
   },
@@ -54,33 +61,38 @@ export const contactFormFieldsForBecomePartnerPage = [
   {
     name: 'name',
     type: 'text',
-    placeholder: 'Name',
+    label: 'Full Name',
+    placeholder: 'Bittu Kumar',
     isRequired: true,
     minLength: 2
   },
   {
     name: 'email',
     type: 'email',
-    placeholder: 'Email Address',
+    label: 'Email Address',
+    placeholder: 'bittu@company.com',
     isRequired: true
   },
   {
     name: 'phone',
     type: 'tel',
-    placeholder: 'Mobile Number',
+    label: 'Mobile Number',
+    placeholder: '9876543210',
     isRequired: true
   },
   {
     name: 'companyName',
     type: 'text',
-    placeholder: 'Company Name',
+    label: 'Company Name',
+    placeholder: 'ABC Tech Pvt Ltd',
     isRequired: true,
     minLength: 2
   },
   {
     name: 'description',
     type: 'textarea',
-    placeholder: 'Brief Description (Optional)',
+    label: 'Brief Description',
+    placeholder: 'Description (Optional)',
     isRequired: false,
     minLength: 10
   },

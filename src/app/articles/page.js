@@ -44,27 +44,27 @@ export default function ArticlesPage() {
         <meta name="robots" content="index, follow" />
         <meta name="author" content="EZII" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
+
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Blogs & Articles | EZII - Payroll Management & HR Solutions" />
         <meta property="og:description" content="Explore our latest blogs, articles, and insights about payroll management, HR best practices, tax compliance, and industry trends." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="EZII" />
-        
+
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Blogs & Articles | EZII - Payroll Management & HR Solutions" />
         <meta name="twitter:description" content="Explore our latest blogs, articles, and insights about payroll management, HR best practices, tax compliance, and industry trends." />
-        
+
         {/* Canonical URL */}
         <link rel="canonical" href="/articles" />
-        
+
         {/* Additional Meta Tags */}
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />
-        
+
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -79,7 +79,7 @@ export default function ArticlesPage() {
           }}
         />
       </Head>
-      
+
       <Navbar />
       <div className={styles.backgroundImage}></div>
       <main className={styles.main}>

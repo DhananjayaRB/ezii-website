@@ -18,19 +18,19 @@ export const apiHelper = {
           'Content-Type': 'application/json',
         },
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error('Error fetching product types:', error);
+      // Error fetching product types
       // Return fallback data in case of API failure
       return [
         'Payroll Management',
-        'Leave Management', 
+        'Leave Management',
         'Attendance Management',
         'Custom Payroll Solutions',
         'Technical Support',
@@ -59,27 +59,27 @@ export const apiHelper = {
         },
         body: JSON.stringify(payload),
       });
-      
+
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('API Error Response:', errorText);
+        // API Error Response
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       // Check if response is JSON or text
       const contentType = response.headers.get('content-type');
       let data;
-      
+
       if (contentType && contentType.includes('application/json')) {
         data = await response.json();
       } else {
         const textData = await response.text();
         data = { message: textData };
       }
-      
+
       return { success: true, data };
     } catch (error) {
-      console.error('Error submitting contact form:', error);
+      // Error submitting contact form
       throw error;
     }
   },
@@ -101,7 +101,7 @@ export const apiHelper = {
 
       return await response.json();
     } catch (error) {
-      console.error('API call failed:', error);
+      // API call failed
       throw error;
     }
   }

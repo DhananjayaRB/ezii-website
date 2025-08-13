@@ -34,7 +34,6 @@
 .content {
   text-align: center;
   max-width: 700px;
-  padding: 2rem 100px;
 
   @media (max-width: 1024px) {
     padding: 2rem 50px;
@@ -48,73 +47,6 @@
   @media (max-width: 480px) {
     max-width: 90%;
     padding: 1rem 1rem;
-  }
-}
-
-.illustration {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  height: 70px;
-
-  @media (max-width: 768px) {
-    height: 60px;
-    margin-bottom: 0.75rem;
-  }
-
-  @media (max-width: 480px) {
-    height: 50px;
-    margin-bottom: 0.5rem;
-  }
-}
-
-.illustrationImage {
-  max-width: 60%;
-  max-height: 100%;
-  object-fit: contain;
-
-  @media (max-width: 768px) {
-    max-width: 55%;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 50%;
-  }
-}
-
-.title {
-  font-family: "Lato", Sans-serif;
-  font-size: 48px;
-  font-weight: 700;
-  color: #000000;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-
-  @media (max-width: 768px) {
-    font-size: clamp(2rem, 4vw, 3rem);
-  }
-
-  @media (max-width: 480px) {
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  }
-}
-
-.description {
-  font-size: 1.3rem;
-  color: #4a5568;
-  line-height: 1.6;
-  margin-bottom: 3rem;
-  font-weight: 400;
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
   }
 }
 

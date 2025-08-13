@@ -30,7 +30,7 @@ export default function ContactForm() {
       try {
         setIsLoading(true);
         const productTypes = await apiHelper.getProductTypes();
-        
+
         // Update form fields with dynamic service options
         const updatedFormFields = contactFormFieldsForHomePage.map(field => {
           if (field.name === 'service') {
@@ -41,10 +41,10 @@ export default function ContactForm() {
           }
           return field;
         });
-        
+
         setDynamicFormFields(updatedFormFields);
       } catch (error) {
-        console.error('Error fetching product types:', error);
+        // Error fetching product types
         // Use original form fields as fallback
         setDynamicFormFields(contactFormFieldsForHomePage);
       } finally {
@@ -72,7 +72,7 @@ export default function ContactForm() {
 
       // Submit form data to API
       const result = await apiHelper.submitContactForm(formData);
-      
+
       if (result.success) {
         setSubmitSuccess(true);
         // Reset form data after successful submission
@@ -85,16 +85,16 @@ export default function ContactForm() {
           designation: '',
           description: ''
         });
-        
+
         // Reset success message after 5 seconds
         setTimeout(() => {
           setSubmitSuccess(false);
         }, 5000);
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      // Error submitting form
       setSubmitError('Failed to submit form. Please try again.');
-      
+
       // Clear error message after 5 seconds
       setTimeout(() => {
         setSubmitError('');
@@ -107,10 +107,10 @@ export default function ContactForm() {
   // Show loading state while fetching data
   if (isLoading) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         minHeight: '200px',
         flexDirection: 'column',
         gap: '1rem'
@@ -172,7 +172,7 @@ export default function ContactForm() {
         </div>
       )}
 
-      <ContactSection 
+      <ContactSection
         formFields={dynamicFormFields}
         onChange={handleContactFormChange}
         onSubmit={handleContactFormSubmit}

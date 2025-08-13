@@ -7,6 +7,18 @@ import styles from './footer.module.scss';
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  // Function to handle smooth scrolling to FAQ section
+  const scrollToFAQ = (e) => {
+    e.preventDefault();
+    const faqSection = document.getElementById('faq');
+    if (faqSection) {
+      faqSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -24,7 +36,7 @@ export default function Footer() {
                 />
               </div>
               <p className={styles.companyTagline}>
-                Payroll, Simplified. The EZII Way.
+                Payroll Simplified, The EZII Way.
               </p>
             </div>
             <p className={styles.companyDescription}>
@@ -75,7 +87,7 @@ export default function Footer() {
               <li><a href="/partners" className={styles.footerLink}>Partners</a></li>
                               <li><a href="/#contact" className={styles.footerLink}>Contact</a></li>
               <li><a href="/resources" className={styles.footerLink}>Blog</a></li>
-              <li><a href="/#faq" className={styles.footerLink}>FAQ</a></li>
+              <li><a href="/#faq" onClick={scrollToFAQ} className={styles.footerLink}>FAQ</a></li>
             </ul>
           </div>
 

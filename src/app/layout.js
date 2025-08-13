@@ -36,17 +36,25 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://ezii.com'),
+  metadataBase: new URL('https://ezii-website.vercel.app'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'EZII Payroll - Simplified Payroll Management | The EZII Way',
     description: 'EZII Payroll: Where Complexity Meets Simplicity. Backed by 20+ years of experience, EZII helps you get payroll, leave management, and attendance right without hassle.',
-    url: 'https://ezii.com',
+    url: 'https://ezii-website.vercel.app',
     siteName: 'EZII Payroll',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://ezii-website.vercel.app/assets/banner-ezii.webp',
+        width: 1035,
+        height: 695,
+        alt: 'EZII Payroll - Simplified Payroll Management',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -72,14 +80,23 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#2c2ce9" />
-        
+        <meta name="author" content="EZII Team" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://ezii-website.vercel.app/" />
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+
         {/* DNS prefetch for potential API calls */}
-        <link rel="dns-prefetch" href="//api.ezii.com" />
-        <link rel="dns-prefetch" href="//cdn.ezii.com" />
+        <link rel="dns-prefetch" href="//api.ezii-website.vercel.app" />
+        <link rel="dns-prefetch" href="//cdn.ezii-website.vercel.app" />
+
+        {/* Google Search Console Verification */}
+        {/* <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> */}
+
+        {/* AI Chatbot Script - Updated with cache busting */}
+        {/* <script src="/chatbot.js?v=3.2" defer></script> */}
       </head>
       <body>
         {children}

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './heroSection.module.scss';
 import Image from 'next/image';
 import Button from '../Button';
-import { StarOutlined, FileTextOutlined, DollarOutlined, SafetyCertificateOutlined, TeamOutlined } from '@ant-design/icons';
+import { TeamOutlined, BarChartOutlined } from '@ant-design/icons';
 import ScrollableFeaturesSection from '../ScrollableFeaturesSection';
 import PricingSection from '../PricingSection';
 import PartnerSection from '../PartnerSection';
@@ -10,68 +10,68 @@ import TestimonialsSection from '../TestimonialsSection';
 import ContactForm from '../ContactForm';
 import FAQSection from '../FAQSection';
 import Footer from '../Footer';
+import ClientMarquee from '../ClientMarquee';
 import { clientLogos } from '@/app/constants';
-// import {BlogPost} from '../articles/test';
-
-const firstRowLogos = clientLogos.slice(0, 6);
-const secondRowLogos = clientLogos.slice(6);
 
 export default function HeroSection() {
   return (
     <>
-      <section className={styles.hero}>
-        <div className={styles.content}>
-          <h1>Payroll, Simplified</h1>
-          <h2 style={{ color: '#F05A00', marginBottom: '1.5rem' }}>The EZII Way</h2>
-          <p className={styles.description}>
-            Backed by 20+ years of experience, EZII helps you get it right—payroll, leave management, or attendance—without hassle.
-          </p>
-          <div style={{ marginTop: '1.5rem' }}>
-            <Button
-              href="/onboarding"
-              variant="brand"
-              size="medium"
-              icon="→"
-              iconPosition="right"
-            >
-              Get Started
-            </Button>
+      {/* Hero Section with enhanced SEO */}
+      <section className={styles.hero} aria-labelledby="hero-title">
+        <div>
+          <div className={styles.content}>
+            <h1 id="hero-title">Payroll, Simplified</h1>
+            <h2 style={{ color: '#F05A00', marginBottom: '1.5rem' }}>The EZII Way</h2>
+            <p className={styles.description}>
+              Backed by 20+ years of experience, EZII helps you get it right—payroll, leave management, or attendance—without hassle.
+            </p>
+            <div style={{ marginTop: '1.5rem' }}>
+              <Button
+                href="/onboarding"
+                variant="brand"
+                size="medium"
+                icon="→"
+                iconPosition="right"
+                aria-label="Get Started with EZII Payroll"
+              >
+                Get Started
+              </Button>
+            </div>
+          </div>
+          <div className={styles.visual} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              src="/assets/banner-ezii.webp"
+              alt="EZII Payroll Management Software Interface - Simplified Payroll Solutions"
+              width={1035}
+              height={695}
+              style={{ borderRadius: '1.5rem', maxWidth: '100%', height: 'auto' }}
+              priority
+            />
           </div>
         </div>
-        <div className={styles.visual} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Image
-            src="/assets/banner-ezii.webp"
-            alt="EZII Payroll Banner"
-            width={1035}
-            height={695}
-            style={{ borderRadius: '1.5rem', maxWidth: '100%', height: 'auto' }}
-            priority
-          />
+        <div className={styles.heroClientMarquee} aria-label="Trusted by leading companies">
+          <div className={`${styles.clientMarquee} ${styles.leftToRight} ${styles.slow}`}>
+            {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((logo, idx) => (
+              <div className={styles.clientLogo} key={`ltr-${idx}`}>
+                <Image
+                  src={`/assets/clients/${logo}`}
+                  alt={`${logo.replace('.webp', '').replace('.png', '').replace('.jpg', '')} - EZII Client`}
+                  width={120}
+                  height={60}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-      <div className={styles.clientMarqueeWrapper}>
-        <div className={`${styles.clientMarquee} ${styles.leftToRight} ${styles.slow}`}>
-          {[...firstRowLogos, ...firstRowLogos].map((logo, idx) => (
-            <div className={styles.clientLogo} key={`ltr-${idx}`}>
-              <Image src={`/assets/clients/${logo}`} alt={`Client ${logo}`} width={120} height={60} />
-            </div>
-          ))}
-        </div>
-        <div className={`${styles.clientMarquee} ${styles.rightToLeft} ${styles.slow}`}>
-          {[...secondRowLogos, ...secondRowLogos].map((logo, idx) => (
-            <div className={styles.clientLogo} key={`rtl-${idx}`}>
-              <Image src={`/assets/clients/${logo}`} alt={`Client ${logo}`} width={120} height={60} />
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* New Section: Business Owners & HR/Finance */}
-      <section className={styles.dualCardSection}>
-        <h2 className={styles.dualCardHeading}>
-          Payroll can be challenging & complex, but it<br />doesn't have to be.
+
+      {/* Business Owners & HR/Finance Section with enhanced SEO */}
+      <section className={styles.dualCardSection} aria-labelledby="dual-card-heading">
+        <h2 id="dual-card-heading" className={styles.dualCardHeading}>
+          Payroll can be challenging and complex, but it<br />doesn't have to be.
         </h2>
         <div className={styles.dualCardGrid}>
-          <div className={styles.dualCard}>
+          <article className={styles.dualCard}>
             <div className={styles.dualCardContent}>
               <div className={styles.dualCardHeader}>
                 <div>
@@ -79,8 +79,8 @@ export default function HeroSection() {
                   <h3 className={styles.dualCardTitle}>Business Owners</h3>
                   <div className={styles.dualCardUnderline}></div>
                 </div>
-                <div className={styles.dualCardIcon}>
-                  <DollarOutlined style={{ fontSize: '30px', color: '#667eea' }} />
+                <div className={styles.dualCardIcon} aria-hidden="true">
+                  <BarChartOutlined style={{ fontSize: '45px', color: '#667eea' }} />
                 </div>
               </div>
               <div className={styles.dualCardBody}>
@@ -94,13 +94,14 @@ export default function HeroSection() {
                   icon="→"
                   iconPosition="right"
                   className={styles.dualCardLink}
+                  aria-label="Get Started for Business Owners"
                 >
                   Get started
                 </Button>
               </div>
             </div>
-          </div>
-          <div className={styles.dualCard}>
+          </article>
+          <article className={styles.dualCard}>
             <div className={styles.dualCardContent}>
               <div className={styles.dualCardHeader}>
                 <div>
@@ -108,8 +109,8 @@ export default function HeroSection() {
                   <h3 className={styles.dualCardTitle}>HR/Finance</h3>
                   <div className={styles.dualCardUnderline}></div>
                 </div>
-                <div className={styles.dualCardIcon}>
-                  <TeamOutlined style={{ fontSize: '30px', color: '#667eea' }} />
+                <div className={styles.dualCardIcon} aria-hidden="true">
+                  <TeamOutlined style={{ fontSize: '45px', color: '#667eea' }} />
                 </div>
               </div>
               <div className={styles.dualCardBody}>
@@ -123,31 +124,32 @@ export default function HeroSection() {
                   icon="→"
                   iconPosition="right"
                   className={styles.dualCardLink}
+                  aria-label="Get Started for HR and Finance Teams"
                 >
                   Get started
                 </Button>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
-      {/* New Section: EZII Payroll Complexity Meets Simplicity */}
-      <section className={styles.complexitySection}>
+      {/* EZII Payroll Complexity Meets Simplicity Section with enhanced SEO */}
+      <section className={styles.complexitySection} aria-labelledby="complexity-heading">
         <div className={styles.complexityContainer}>
           <div className={styles.complexityContent}>
-            <div className={styles.gearIcons}>
+            <div className={styles.gearIcons} aria-hidden="true">
               <Image
                 src="/assets/feat_robust_control.webp"
-                alt="Robust Control Feature"
+                alt="Robust Control Feature Icon - EZII Payroll Management"
                 width={80}
                 height={60}
-                style={{ maxWidth: '100%', height: 'auto' }}
+                style={{ maxWidth: '100%', height: 'auto', filter: 'hue-rotate(240deg) saturate(120%) brightness(100%)' }}
               />
             </div>
-            <h5 className={styles.complexityHeading}>
+            <h3 id="complexity-heading" className={styles.complexityHeading}>
               EZII Payroll: Where Complexity Meets Simplicity
-            </h5>
+            </h3>
             <p className={styles.complexityDescription}>
               EZII Payroll empowers you to effortlessly configure your unique payroll landscape. From intricate organizational structures and diverse employee types to complex pay rules and intricate compliance regulations, EZII provides the flexibility to tailor the system to your exact needs.
             </p>
@@ -155,7 +157,7 @@ export default function HeroSection() {
           <div className={styles.complexityVisual}>
             <Image
               src="/assets/browser_2x-3-768x576.webp"
-              alt="EZII Payroll Interface"
+              alt="EZII Payroll Software Interface - User-friendly Payroll Management Dashboard"
               width={768}
               height={576}
               style={{
@@ -168,30 +170,30 @@ export default function HeroSection() {
         </div>
       </section>
 
-      {/* New Section: EZII Payroll Features with Scrollable Content */}
+      {/* EZII Payroll Features with Scrollable Content */}
       <ScrollableFeaturesSection />
 
-      {/* New Section: Pricing Section */}
-
+      {/* Pricing Section */}
       <PricingSection showHeading={true} />
 
-      {/* New Section: Partner Section */}
+      {/* Client Marquee */}
+      <ClientMarquee />
+
+      {/* Partner Section */}
       <PartnerSection />
 
-      {/* New Section: Testimonials Section */}
+      {/* Testimonials Section */}
       <TestimonialsSection />
 
-      {/* New Section: Contact Section */}
+      {/* Contact Section */}
       <ContactForm />
 
-      {/* New Section: FAQ Section */}
+      {/* FAQ Section */}
       <FAQSection />
 
       {/* Footer */}
       <Footer />
       {/* <BlogPost /> */}
-
-
     </>
   );
 }

@@ -150,7 +150,7 @@ const PaymentConfirmationSuccess = () => {
             };
 
             localStorage.setItem("PanInfo", JSON.stringify(panInfo));
-            console.log("Saving payment info with:", panInfo);
+            // Saving payment info with panInfo
             await savePAN(panInfo);
 
             // Save GST information
@@ -160,7 +160,7 @@ const PaymentConfirmationSuccess = () => {
             };
 
             localStorage.setItem("GSTInfo", JSON.stringify(gstInfo));
-            console.log("Saving payment info with:", gstInfo);
+            // Saving payment info with gstInfo
             await saveGST(gstInfo);
 
             // Save payment information
@@ -175,13 +175,13 @@ const PaymentConfirmationSuccess = () => {
             };
 
             localStorage.setItem("PaymentInfo", JSON.stringify(paymentInfo));
-            console.log("Saving payment info with:", paymentInfo);
+            // Saving payment info with paymentInfo
             await savePaymentInfo(paymentInfo);
 
             await sendLoginInfoMail(mailInfo);
 
             // Disable menu items based on formData
-            console.log("Calling disableMenuInfo with org_id:", orgId);
+            // Calling disableMenuInfo with org_id
             const DisabledMenuIds = [];
 
             if (!data.is_fbp) {
@@ -211,7 +211,7 @@ const PaymentConfirmationSuccess = () => {
             };
 
             await disableMenuInfo(disableMenuPayload);
-            console.log("disableMenuInfo API call successful");
+            // disableMenuInfo API call successful
           }
         }
 
@@ -225,7 +225,7 @@ const PaymentConfirmationSuccess = () => {
 
       } catch (error) {
         setLoading(false);
-        console.error("Error during organization creation or subsequent calls", error);
+        // Error during organization creation or subsequent calls
         message.error('Error setting up account. Please contact support.');
       }
     };

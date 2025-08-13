@@ -34,20 +34,20 @@
 .content {
   text-align: center;
   max-width: 700px;
-  padding: 2rem 100px;
+  // padding: 2rem 100px;
 
   @media (max-width: 1024px) {
-    padding: 2rem 50px;
+    // padding: 2rem 50px;
   }
 
   @media (max-width: 768px) {
     max-width: 85%;
-    padding: 1.5rem 2rem;
+    // padding: 1.5rem 2rem;
   }
 
   @media (max-width: 480px) {
     max-width: 90%;
-    padding: 1rem 1rem;
+    // padding: 1rem 1rem;
   }
 }
 
@@ -72,18 +72,18 @@
 
 .articlesSection {
   width: 100%;
-  padding: 2rem 100px 4rem;
+  // padding: 2rem 100px 4rem;
   background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 50%, #e8f0ff 100%);
 
   @media (max-width: 1024px) {
-    padding: 2rem 50px 3rem;
+    // padding: 2rem 50px 3rem;
   }
 
   @media (max-width: 768px) {
-    padding: 1.5rem 2rem 2.5rem;
+    // padding: 1.5rem 2rem 2.5rem;
   }
 
   @media (max-width: 480px) {
-    padding: 1rem 1rem 2rem;
+    // padding: 1rem 1rem 2rem;
   }
 } 

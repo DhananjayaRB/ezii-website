@@ -5,9 +5,10 @@ import styles from './pricingSection.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { CalculatorOutlined } from '@ant-design/icons';
 
-const PricingSection = ({showHeading = false}) => {
-  const [employeeCount, setEmployeeCount] = useState('1');
+const PricingSection = ({ showHeading = false }) => {
+  const [employeeCount, setEmployeeCount] = useState('20');
   const router = useRouter();
 
   // Function to calculate monthly cost based on employee count
@@ -16,13 +17,13 @@ const PricingSection = ({showHeading = false}) => {
     if (!count || count === '' || isNaN(count)) {
       return 1000; // Minimum price for empty/invalid input
     }
-    
+
     const employeeCount = parseInt(count, 10);
-    
+
     if (employeeCount <= 0) return 1000; // Minimum price
-    
+
     let totalCost = 0;
-    
+
     if (employeeCount <= 100) {
       // 1-100 employees: 50/employee
       totalCost = employeeCount * 50;
@@ -36,7 +37,7 @@ const PricingSection = ({showHeading = false}) => {
       // For more than 500 employees, use the 500 employee rate
       totalCost = (100 * 50) + (200 * 45) + (200 * 40);
     }
-    
+
     // Ensure minimum price of 1000
     return Math.max(totalCost, 1000);
   };
@@ -51,20 +52,21 @@ const PricingSection = ({showHeading = false}) => {
         )}
         <div className={styles.pricingCardBg}>
           <div className={styles.pricingCardWrapper}>
-            
+
             <div className={styles.responsibleInfo}>
-              
+
               <div className={styles.responsibleImageWrapper}>
-                <Image
-                  src="/assets/pricing-1.webp"
-                  alt="Pricing Illustration"
-                  width={110}
-                  height={110}
-                  style={{ maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto' }}
+                <CalculatorOutlined
+                  style={{
+                    fontSize: '80px',
+                    color: '#8b5cf6',
+                    display: 'block',
+                    margin: '0 auto'
+                  }}
                 />
               </div>
               <h2>Responsible Pricing, Exceptional Value</h2>
-              <p>At EZII, your costs align with your benefits. Just as EZII simplifies payroll, we simplify pricing. Pay only for what you use. Add employees, pay more. Reduce headcount, pay less. Need KYC integrations? Pay only for those you need. No rigid plans. Experience EZII’s flexible pricing.</p>
+              <p>At EZII, your costs align with your benefits. Just as EZII simplifies payroll, we simplify pricing. Pay only for what you use. Add employees, pay more. Reduce headcount, pay less. Need KYC integrations? Pay only for those you need. No rigid plans. Experience EZII's flexible pricing.</p>
             </div>
             <div className={styles.pricingCalculator}>
               <div className={styles.pricingIcon}>
@@ -89,7 +91,7 @@ const PricingSection = ({showHeading = false}) => {
                   onChange={e => {
                     const value = e.target.value.replace(/^0+/, '');
                     const numValue = parseInt(value, 10);
-                    
+
                     // Prevent negative numbers
                     if (numValue < 0) {
                       setEmployeeCount('1');
@@ -101,7 +103,7 @@ const PricingSection = ({showHeading = false}) => {
                       setEmployeeCount(value);
                     }
                   }}
-                  onBlur={e => { 
+                  onBlur={e => {
                     if (!e.target.value || parseInt(e.target.value, 10) < 1) {
                       setEmployeeCount('1');
                     }
@@ -124,13 +126,13 @@ const PricingSection = ({showHeading = false}) => {
                   <span className={styles.priceAmount}>₹{calculateMonthlyCost(employeeCount)}/month</span>
                 )}
               </div>
-              <button 
+              <button
                 className={styles.getStartedBtn}
                 onClick={() => router.push('/onboarding')}
               >
                 Get Started
               </button>
-              <p className={styles.minPriceNote}>*Min price 1000/month</p>
+              <p className={styles.minPriceNote}>*Minimum price: ₹1000/month</p>
             </div>
           </div>
         </div>

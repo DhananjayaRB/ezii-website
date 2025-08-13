@@ -443,9 +443,8 @@ const Features = () => {
                 // Call disableMenuInfo API
                 try {
                   await disableMenuInfo(disableMenuPayload);
-                  console.log("Menu settings updated successfully.");
                 } catch (error) {
-                  console.error("Error updating menu settings:", error);
+                  // Error updating menu settings
                 }
 
                 message.success('Payment successful! Welcome to Ezii!');
@@ -461,18 +460,18 @@ const Features = () => {
             } catch (error) {
               dispatch(setLoading(false));
               setPaymentProcessingModalVisible(false);
-              console.error("Error checking payment status:", error);
+              // Error checking payment status
             }
           };
 
           const intervalId = setInterval(checkPaymentStatus, 10000);
         } else {
-          console.error("link_id is missing in the response");
+          // link_id is missing in the response
           message.error('Payment link not received from server');
           setPaymentProcessingModalVisible(false);
         }
       } else {
-        console.error("Response is undefined");
+        // Response is undefined
         message.error('Payment link not received from server');
         setPaymentProcessingModalVisible(false);
       }
@@ -481,7 +480,7 @@ const Features = () => {
     } catch (error) {
       dispatch(setLoading(false));
       setPaymentProcessingModalVisible(false);
-      console.error("Error during payment confirmation or status check:", error);
+      // Error during payment confirmation or status check
       message.error('An error occurred. Please try again.');
     }
   };

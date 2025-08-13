@@ -107,6 +107,10 @@
   border-radius: 50%;
   color: #ffffff;
   transition: all 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
   
   &:hover {
     background: #667eea;
@@ -145,6 +149,10 @@
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
   
   &:hover {
     color: #667eea;
@@ -182,13 +190,17 @@
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
   
   &:hover {
     color: #667eea;
   }
   
   @media (max-width: 768px) {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -252,6 +264,10 @@
   text-decoration: none;
   font-size: 0.85rem;
   transition: color 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
   
   &:hover {
     color: #667eea;

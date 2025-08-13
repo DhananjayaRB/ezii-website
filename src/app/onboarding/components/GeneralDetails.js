@@ -77,7 +77,8 @@ const GeneralDetails = ({ onNext }) => {
 
   const validatePan = (_, value) => {
     if (!value) {
-      return Promise.reject(new Error('PAN is required'));
+      // return Promise.reject(new Error('PAN is required'));
+      return Promise.resolve();
     }
     if (!panPattern.test(value)) {
       return Promise.reject(new Error('Invalid PAN format (e.g., ABCDE1234F)'));
@@ -98,11 +99,12 @@ const GeneralDetails = ({ onNext }) => {
 
   const validatePhone = (_, value) => {
     if (!value) {
-      return Promise.reject(new Error('Phone number is required'));
+      // return Promise.reject(new Error('Phone number is required'));
+      return Promise.resolve();
     }
     const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(value)) {
-      return Promise.reject(new Error('Phone number must be 10 digits'));
+      return Promise.reject(new Error('Phone number must be 10'));
     }
     return Promise.resolve();
   };
@@ -125,7 +127,7 @@ const GeneralDetails = ({ onNext }) => {
         'organisationName',
         'businessType',
         'industry',
-        'panCardNo',
+        // 'panCardNo',
         'taxableEmployees',
         'keyholderName',
         'designation',
@@ -151,6 +153,7 @@ const GeneralDetails = ({ onNext }) => {
       }
 
       // Validate phone number format
+
       const phoneRegex = /^[0-9]{10}$/;
       if (!phoneRegex.test(values.phoneNumber)) {
         setErrorMessage('Phone number must be 10 digits');
@@ -158,12 +161,15 @@ const GeneralDetails = ({ onNext }) => {
         return;
       }
 
+
       // Validate PAN format
-      const panPattern = /^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
-      if (!panPattern.test(values.panCardNo)) {
-        setErrorMessage('Invalid PAN format (e.g., ABCDE1234F)');
-        setIsSubmitting(false);
-        return;
+      if (values.panCardNo && values.panCardNo.trim() !== '') {
+        const panPattern = /^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
+        if (!panPattern.test(values.panCardNo)) {
+          setErrorMessage('Invalid PAN format (e.g., ABCDE1234F)');
+          setIsSubmitting(false);
+          return;
+        }
       }
 
       // Validate employee counts
@@ -476,7 +482,7 @@ const GeneralDetails = ({ onNext }) => {
                 label={
                   <Space className={styles.modernFormLabel}>
                     <UserOutlined />
-                    Keyholder Name
+                    Name
                   </Space>
                 }
                 rules={[{ required: true, message: 'Please enter keyholder name' }]}
@@ -517,7 +523,7 @@ const GeneralDetails = ({ onNext }) => {
                     Email Address
                   </Space>
                 }
-                rules={[{ validator: validateEmail }]}
+                rules={[{ required: true, validator: validateEmail }]}
               >
                 <Input
                   placeholder="keyholder@company.com"
@@ -536,7 +542,7 @@ const GeneralDetails = ({ onNext }) => {
                     Phone Number
                   </Space>
                 }
-                rules={[{ validator: validatePhone }]}
+                rules={[{ required: true, validator: validatePhone }]}
               >
                 <Input
                   placeholder="9876543210"

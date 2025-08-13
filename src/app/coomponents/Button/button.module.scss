@@ -234,7 +234,14 @@
 .large {
   padding: var(--spacing-md) var(--spacing-xl);
   font-size: var(--font-size-lg);
-  min-height: 52px;
+  // min-height: 52px;
+}
+
+.compact {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  min-height: 20px;
+  border-radius: 0.5rem;
 }
 
 .xlarge {
