@@ -5,7 +5,6 @@ import {
   setGeneralDetails,
   setBusinessType,
   setIndustry,
-  setLoading,
 } from '../store/onboardingSlice';
 import {
   getBusinessType,
@@ -23,7 +22,6 @@ import {
   Row,
   Col,
   Typography,
-  Divider,
   message,
   Space,
 } from 'antd';
@@ -77,7 +75,6 @@ const GeneralDetails = ({ onNext }) => {
 
   const validatePan = (_, value) => {
     if (!value) {
-      // return Promise.reject(new Error('PAN is required'));
       return Promise.resolve();
     }
     if (!panPattern.test(value)) {
@@ -99,7 +96,6 @@ const GeneralDetails = ({ onNext }) => {
 
   const validatePhone = (_, value) => {
     if (!value) {
-      // return Promise.reject(new Error('Phone number is required'));
       return Promise.resolve();
     }
     const phoneRegex = /^[0-9]{10}$/;
@@ -115,19 +111,15 @@ const GeneralDetails = ({ onNext }) => {
 
   const handleSubmit = async () => {
     try {
-      // Clear any previous error messages
       setErrorMessage('');
       setIsSubmitting(true);
 
-      // Validate all required fields
       const values = await form.validateFields();
 
-      // Additional validation checks
       const requiredFields = [
         'organisationName',
         'businessType',
         'industry',
-        // 'panCardNo',
         'taxableEmployees',
         'keyholderName',
         'designation',
@@ -136,7 +128,6 @@ const GeneralDetails = ({ onNext }) => {
         'address1'
       ];
 
-      // Check if all required fields are filled
       const missingFields = requiredFields.filter(field => !values[field]);
       if (missingFields.length > 0) {
         setErrorMessage('Please fill in all required fields');
@@ -144,15 +135,12 @@ const GeneralDetails = ({ onNext }) => {
         return;
       }
 
-      // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(values.email)) {
         setErrorMessage('Please enter a valid email address');
         setIsSubmitting(false);
         return;
       }
-
-      // Validate phone number format
 
       const phoneRegex = /^[0-9]{10}$/;
       if (!phoneRegex.test(values.phoneNumber)) {
@@ -161,8 +149,6 @@ const GeneralDetails = ({ onNext }) => {
         return;
       }
 
-
-      // Validate PAN format
       if (values.panCardNo && values.panCardNo.trim() !== '') {
         const panPattern = /^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
         if (!panPattern.test(values.panCardNo)) {
@@ -172,7 +158,6 @@ const GeneralDetails = ({ onNext }) => {
         }
       }
 
-      // Validate employee counts
       const taxableCount = parseInt(values.taxableEmployees, 10);
       const nonTaxableCount = parseInt(values.nonTaxableEmployees, 10);
 
@@ -187,8 +172,6 @@ const GeneralDetails = ({ onNext }) => {
         setIsSubmitting(false);
         return;
       }
-
-      // If all validations pass, proceed with submission
 
       localStorage.setItem("GeneralDetails", JSON.stringify(values));
 
@@ -257,7 +240,6 @@ const GeneralDetails = ({ onNext }) => {
           setIsSubmitting(false);
           setErrorMessage('');
 
-          // Only move to next step on success
           onNext();
         }
       } catch (error) {
@@ -275,344 +257,325 @@ const GeneralDetails = ({ onNext }) => {
   };
 
   return (
-    <div className={styles.modernFormContainer}>
-      <Card className={styles.modernFormCard}>
-        <div className={styles.modernFormHeader}>
-          <Title level={3} className={styles.modernFormTitle}>
-            <BankOutlined className={styles.modernFormIcon} />
-            Company Information
-          </Title>
-        </div>
+    <Card className={styles.modernFormCard}>
+      <Title level={3} className={styles.modernFormTitle}>
+        <BankOutlined className={styles.modernFormIcon} />
+        Company Information
+      </Title>
 
-        <Form
-          form={form}
-          layout="vertical"
-          onValuesChange={handleFormChange}
-          initialValues={generalDetails}
-          className={styles.modernAntdForm}
-        >
-          <Row gutter={[12, 12]}>
-            {/* Company Details Section */}
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="organisationName"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <BankOutlined />
-                    Organization Name
-                  </Space>
-                }
-                rules={[{ required: true, message: 'Please enter organization name' }]}
-              >
-                <Input
-                  placeholder="Enter your organization name"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="businessType"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <BankOutlined />
-                    Business Type
-                  </Space>
-                }
-                rules={[{ required: true, message: 'Please select business type' }]}
-              >
-                <Select
-                  placeholder="Select business type"
-                  size="large"
-                  className={styles.modernAntdSelect}
-                  showSearch
-                  filterOption={(input, option) =>
-                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  {businessType.map((type) => (
-                    <Option key={type.id} value={type.id}>
-                      {type.name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="industry"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <BankOutlined />
-                    Industry
-                  </Space>
-                }
-                rules={[{ required: true, message: 'Please select industry' }]}
-              >
-                <Select
-                  placeholder="Select industry"
-                  size="large"
-                  className={styles.modernAntdSelect}
-                  showSearch
-                  filterOption={(input, option) =>
-                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  {industry.map((ind) => (
-                    <Option key={ind.id} value={ind.id}>
-                      {ind.name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="panCardNo"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <IdcardOutlined />
-                    PAN Card Number
-                  </Space>
-                }
-                rules={[{ validator: validatePan }]}
-              >
-                <Input
-                  placeholder="ABCDE1234F"
-                  size="large"
-                  className={styles.modernAntdInput}
-                  maxLength={10}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="gstNo"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <IdcardOutlined />
-                    GST Number
-                  </Space>
-                }
-              >
-                <Input
-                  placeholder="Enter GST number (optional)"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="taxableEmployees"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <TeamOutlined />
-                    Taxable Employees
-                  </Space>
-                }
-                rules={[
-                  { required: true, message: 'Please enter number of taxable employees' },
-                  {
-                    validator: (_, value) => {
-                      if (value === '' || value === null || value === undefined) {
-                        return Promise.reject(new Error('Please enter number of taxable employees'));
-                      }
-                      const numValue = Number(value);
-                      if (isNaN(numValue) || numValue < 0) {
-                        return Promise.reject(new Error('Must be a positive number'));
-                      }
-                      return Promise.resolve();
-                    }
-                  }
-                ]}
-              >
-                <Input
-                  type="number"
-                  placeholder="0"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="nonTaxableEmployees"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <TeamOutlined />
-                    Non-Taxable Employees
-                  </Space>
-                }
-                rules={[
-                  {
-                    validator: (_, value) => {
-                      if (value === '' || value === null || value === undefined) {
-                        return Promise.reject(new Error('Please enter number of non-taxable employees'));
-                      }
-                      const numValue = Number(value);
-                      if (isNaN(numValue) || numValue < 0) {
-                        return Promise.reject(new Error('Must be a positive number'));
-                      }
-                      return Promise.resolve();
-                    }
-                  }
-                ]}
-              >
-                <Input
-                  type="number"
-                  placeholder="0"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            {/* Keyholder & Address Information - Merged */}
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="keyholderName"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <UserOutlined />
-                    Name
-                  </Space>
-                }
-                rules={[{ required: true, message: 'Please enter keyholder name' }]}
-              >
-                <Input
-                  placeholder="Enter keyholder full name"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="designation"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <UserOutlined />
-                    Designation
-                  </Space>
-                }
-                rules={[{ required: true, message: 'Please enter designation' }]}
-              >
-                <Input
-                  placeholder="e.g., CEO, Manager, Director"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="email"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <MailOutlined />
-                    Email Address
-                  </Space>
-                }
-                rules={[{ required: true, validator: validateEmail }]}
-              >
-                <Input
-                  placeholder="keyholder@company.com"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="phoneNumber"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <PhoneOutlined />
-                    Phone Number
-                  </Space>
-                }
-                rules={[{ required: true, validator: validatePhone }]}
-              >
-                <Input
-                  placeholder="9876543210"
-                  size="large"
-                  className={styles.modernAntdInput}
-                  maxLength={10}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="address1"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <EnvironmentOutlined />
-                    Address Line 1
-                  </Space>
-                }
-                rules={[{ required: true, message: 'Please enter address' }]}
-              >
-                <Input
-                  placeholder="Enter your complete address"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="address2"
-                label={
-                  <Space className={styles.modernFormLabel}>
-                    <EnvironmentOutlined />
-                    Address Line 2
-                  </Space>
-                }
-              >
-                <Input
-                  placeholder="Apartment, suite, etc. (optional)"
-                  size="large"
-                  className={styles.modernAntdInput}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <div className={styles.modernFormActions}>
-            <Button
-              type="primary"
-              size="large"
-              onClick={handleSubmit}
-              className={styles.modernSubmitButton}
-              icon={<CheckCircleOutlined />}
-              loading={isSubmitting}
-              disabled={isSubmitting}
+      <Form
+        form={form}
+        layout="vertical"
+        onValuesChange={handleFormChange}
+        initialValues={generalDetails}
+        className={styles.modernAntdForm}
+      >
+        <Row gutter={[12, 12]}>
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="organisationName"
+              label={
+                <Space>
+                  <BankOutlined />
+                  Organization Name
+                </Space>
+              }
+              rules={[{ required: true, message: 'Please enter organization name' }]}
             >
-              {isSubmitting ? 'Processing...' : 'Continue to Features'}
-            </Button>
+              <Input
+                placeholder="Enter your organization name"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
 
-            {errorMessage && (
-              <div className={styles.errorMessage}>
-                {errorMessage}
-              </div>
-            )}
-          </div>
-        </Form>
-      </Card>
-    </div>
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="businessType"
+              label={
+                <Space>
+                  <BankOutlined />
+                  Business Type
+                </Space>
+              }
+              rules={[{ required: true, message: 'Please select business type' }]}
+            >
+              <Select
+                placeholder="Select business type"
+                size="large"
+                showSearch
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                {businessType.map((type) => (
+                  <Option key={type.id} value={type.id}>
+                    {type.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="industry"
+              label={
+                <Space>
+                  <BankOutlined />
+                  Industry
+                </Space>
+              }
+              rules={[{ required: true, message: 'Please select industry' }]}
+            >
+              <Select
+                placeholder="Select industry"
+                size="large"
+                showSearch
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                {industry.map((ind) => (
+                  <Option key={ind.id} value={ind.id}>
+                    {ind.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="panCardNo"
+              label={
+                <Space>
+                  <IdcardOutlined />
+                  PAN Card Number
+                </Space>
+              }
+              rules={[{ validator: validatePan }]}
+            >
+              <Input
+                placeholder="ABCDE1234F (optional)"
+                size="large"
+                maxLength={10}
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="gstNo"
+              label={
+                <Space>
+                  <IdcardOutlined />
+                  GST Number
+                </Space>
+              }
+            >
+              <Input
+                placeholder="Enter GST number (optional)"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="taxableEmployees"
+              label={
+                <Space>
+                  <TeamOutlined />
+                  Taxable Employees
+                </Space>
+              }
+              rules={[
+                { required: true, message: 'Please enter number of taxable employees' },
+                {
+                  validator: (_, value) => {
+                    if (value === '' || value === null || value === undefined) {
+                      return Promise.reject(new Error('Please enter number of taxable employees'));
+                    }
+                    const numValue = Number(value);
+                    if (isNaN(numValue) || numValue < 0) {
+                      return Promise.reject(new Error('Must be a positive number'));
+                    }
+                    return Promise.resolve();
+                  }
+                }
+              ]}
+            >
+              <Input
+                type="number"
+                placeholder="0"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="nonTaxableEmployees"
+              label={
+                <Space>
+                  <TeamOutlined />
+                  Non-Taxable Employees
+                </Space>
+              }
+              rules={[
+                {
+                  validator: (_, value) => {
+                    if (value === '' || value === null || value === undefined) {
+                      return Promise.reject(new Error('Please enter number of non-taxable employees'));
+                    }
+                    const numValue = Number(value);
+                    if (isNaN(numValue) || numValue < 0) {
+                      return Promise.reject(new Error('Must be a positive number'));
+                    }
+                    return Promise.resolve();
+                  }
+                }
+              ]}
+            >
+              <Input
+                type="number"
+                placeholder="Enter 0 if none"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="keyholderName"
+              label={
+                <Space>
+                  <UserOutlined />
+                  Name
+                </Space>
+              }
+              rules={[{ required: true, message: 'Please enter your name' }]}
+            >
+              <Input
+                placeholder="name"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="designation"
+              label={
+                <Space>
+                  <UserOutlined />
+                  Designation
+                </Space>
+              }
+              rules={[{ required: true, message: 'Please enter designation' }]}
+            >
+              <Input
+                placeholder="CEO, Manager, Director"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="email"
+              label={
+                <Space>
+                  <MailOutlined />
+                  Email Address
+                </Space>
+              }
+              rules={[{ required: true, validator: validateEmail }]}
+            >
+              <Input
+                placeholder="Enter your mail"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="phoneNumber"
+              label={
+                <Space>
+                  <PhoneOutlined />
+                  Phone Number
+                </Space>
+              }
+              rules={[{ required: true, validator: validatePhone }]}
+            >
+              <Input
+                placeholder="Phone number"
+                size="large"
+                maxLength={10}
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="address1"
+              label={
+                <Space>
+                  <EnvironmentOutlined />
+                  Address Line 1
+                </Space>
+              }
+              rules={[{ required: true, message: 'Please enter address' }]}
+            >
+              <Input
+                placeholder="Enter your complete address"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xs={24} sm={12} md={8}>
+            <Form.Item
+              name="address2"
+              label={
+                <Space>
+                  <EnvironmentOutlined />
+                  Address Line 2
+                </Space>
+              }
+            >
+              <Input
+                placeholder="Apartment, suite, etc. (optional)"
+                size="large"
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <div className={styles.modernFormActions}>
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleSubmit}
+            className={styles.modernSubmitButton}
+            icon={<CheckCircleOutlined />}
+            loading={isSubmitting}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Processing...' : 'Continue to Features'}
+          </Button>
+
+          {errorMessage && (
+            <div className={styles.errorMessage}>
+              {errorMessage}
+            </div>
+          )}
+        </div>
+      </Form>
+    </Card>
   );
 };
 

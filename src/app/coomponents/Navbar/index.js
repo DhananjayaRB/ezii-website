@@ -4,6 +4,7 @@ import styles from './navbar.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import Button from '../Button';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,12 +74,14 @@ export default function Navbar() {
         </ul>
 
         <div className={styles.navActions}>
-          <button
-            className={styles.loginBtn}
+          <Button
+            variant="black"
+            size="small"
             onClick={() => window.open('https://ezii.co.in/log-in/', '_blank')}
+            className={styles.loginBtn}
           >
             Log In
-          </button>
+          </Button>
 
           <button
             className={`${styles.mobileMenuToggle} ${isMobileMenuOpen ? styles.active : ''}`}
@@ -132,15 +135,18 @@ export default function Navbar() {
           </ul>
 
           <div className={styles.mobileLoginContainer}>
-            <button
-              className={styles.mobileLoginBtn}
+            <Button
+              variant="black"
+              size="small"
               onClick={() => {
                 window.open('https://ezii.co.in/log-in/', '_blank');
                 toggleMobileMenu();
               }}
+              className={styles.mobileLoginBtn}
+              fullWidth
             >
               Log In
-            </button>
+            </Button>
           </div>
         </div>
       </div>

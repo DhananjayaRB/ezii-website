@@ -47,7 +47,7 @@
   box-shadow: var(--shadow-sm);
 
   &:hover:not(:disabled) {
-    background-color: var(--text-secondary);
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
   }
@@ -73,19 +73,19 @@
   color: var(--text-primary);
 
   &:hover:not(:disabled) {
-    background-color: var(--gray-100);
+    background-color: rgba(43, 40, 184, 0.1);
   }
 }
 
 .gradient {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
   color: white;
   border: none;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 15px rgba(43, 40, 184, 0.3);
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 6px 20px rgba(43, 40, 184, 0.4);
   }
 
   &:active:not(:disabled) {
@@ -94,15 +94,15 @@
 }
 
 .proposal {
-  background: #1976d2;
+  background: var(--primary);
   color: white;
   border: none;
-  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+  box-shadow: 0 4px 15px rgba(43, 40, 184, 0.3);
 
   &:hover:not(:disabled) {
-    background: #1565c0;
+    background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+    box-shadow: 0 6px 20px rgba(43, 40, 184, 0.4);
   }
 
   &:active:not(:disabled) {
@@ -111,37 +111,37 @@
 }
 
 .success {
-  background-color: #10b981;
+  background-color: var(--primary);
   color: white;
 
   &:hover:not(:disabled) {
-    background-color: #059669;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
   }
 }
 
 .danger {
-  background-color: #ef4444;
+  background-color: var(--primary);
   color: white;
 
   &:hover:not(:disabled) {
-    background-color: #dc2626;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
   }
 }
 
 .warning {
-  background-color: #f59e0b;
+  background-color: var(--primary);
   color: white;
 
   &:hover:not(:disabled) {
-    background-color: #d97706;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
   }
 }
 
 .arrow {
-  background-color: #000000;
+  background-color: var(--primary);
   color: white;
   border: none;
   border-radius: 0.75rem;
@@ -149,12 +149,12 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(43, 40, 184, 0.2);
 
   &:hover:not(:disabled) {
-    background-color: #333333;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(43, 40, 184, 0.3);
   }
 
   &:active:not(:disabled) {
@@ -167,7 +167,7 @@
 }
 
 .brand {
-  background-color: #2b28b9;
+  background-color: var(--primary);
   color: white;
   border: none;
   border-radius: 2rem;
@@ -175,12 +175,12 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(44, 44, 233, 0.2);
+  box-shadow: 0 2px 8px rgba(43, 40, 184, 0.2);
 
   &:hover:not(:disabled) {
-    background-color: #1a1ac7;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(44, 44, 233, 0.3);
+    box-shadow: 0 4px 12px rgba(43, 40, 184, 0.3);
   }
 
   &:active:not(:disabled) {
@@ -193,7 +193,7 @@
 }
 
 .black {
-  background-color: rgb(45, 55, 72);
+  background-color: var(--primary);
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 0.75rem;
@@ -201,12 +201,12 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(45, 55, 72, 0.2);
+  box-shadow: 0 2px 8px rgba(43, 40, 184, 0.2);
 
   &:hover:not(:disabled) {
-    background-color: rgb(35, 45, 62);
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(45, 55, 72, 0.3);
+    box-shadow: 0 4px 12px rgba(43, 40, 184, 0.3);
   }
 
   &:active:not(:disabled) {

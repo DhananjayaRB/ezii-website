@@ -95,13 +95,13 @@
       font-weight: 700;
 
       &.active {
-        color: #6836cd;
-        border-color: #6836cd;
+        color: #2b28b8;
+        border-color: #2b28b8;
       }
 
       &:hover {
-        color: #9d00e6;
-        border-color: #9d00e6;
+        color: #4240b5;
+        border-color: #4240b5;
       }
     }
   }
@@ -118,35 +118,12 @@
 }
 
 .loginBtn {
-  background-color: #1e58cd;
-  color: white;
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  font-size: var(--font-size-base);
-  font-weight: 700;
-  border-radius: var(--radius-xl);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  transition: all var(--transition-fast);
-  box-shadow: var(--shadow-sm);
-
-  &:hover {
-    background-color: #F05A00;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
+  // Button component styles will be applied
+  // Custom navbar-specific adjustments
+  min-width: 80px;
+  
   @media (max-width: 768px) {
-    padding: var(--spacing-sm) var(--spacing-xl);
-    font-size: var(--font-size-base);
     min-width: 80px;
-    height: 40px;
   }
 }
 
@@ -334,14 +311,14 @@
         transition: all 0.3s ease;
 
         &.active {
-          color: #F05A00;
-          border-color: #F05A00;
+          color: #1e3a8a;
+          border-color: #1e3a8a;
         }
       }
 
       &:hover span {
-        color: #F05A00;
-        border-color: #F05A00;
+        color: #3b82f6;
+        border-color: #3b82f6;
       }
     }
   }
@@ -354,29 +331,7 @@
 }
 
 .mobileLoginBtn {
+  // Button component styles will be applied
+  // Custom mobile navbar-specific adjustments
   width: 100%;
-  background-color: #1e58cd;
-  color: white;
-  border: none;
-  padding: var(--spacing-md) var(--spacing-lg);
-  font-size: var(--font-size-base);
-  font-weight: 700;
-  border-radius: var(--radius-xl);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  transition: all var(--transition-fast);
-  box-shadow: var(--shadow-sm);
-
-  &:hover {
-    background-color: #F05A00;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
 }

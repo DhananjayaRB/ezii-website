@@ -995,7 +995,7 @@
 
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(44, 44, 233, 0.4);
+    box-shadow: 0 4px 12px rgba(132, 132, 206, 0.4);
     background: linear-gradient(135deg, #6366f1 0%, var(--primary) 100%);
   }
 
@@ -2660,16 +2660,6 @@
 }
 
 // Modern Form Styles
-.modernFormContainer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0;
-
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-}
-
 .modernFormCard {
   border-radius: 20px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
@@ -2678,6 +2668,8 @@
   background: rgba(255, 255, 255, 0.95);
   transition: all 0.3s ease;
   overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
 
   &:hover {
     box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
@@ -2690,28 +2682,19 @@
   }
 }
 
-.modernFormHeader {
-  text-align: center;
-  margin-bottom: 20px;
-  padding: 0 20px;
-
-  @media (max-width: 768px) {
-    margin-bottom: 16px;
-    padding: 0 16px;
-  }
-}
-
 .modernFormTitle {
   color: var(--text-primary);
-  margin-bottom: 8px !important;
+  margin: 24px 0 20px 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   font-size: 24px;
+  text-align: center;
 
   @media (max-width: 768px) {
     font-size: 20px;
+    margin: 20px 0 16px 0 !important;
   }
 }
 
@@ -2769,73 +2752,55 @@
       }
     }
   }
-}
 
-.modernFormLabel {
-  .anticon {
-    color: var(--primary);
-    font-size: 16px;
-
-    @media (max-width: 768px) {
-      font-size: 14px;
-    }
-  }
-}
-
-.modernAntdInput {
-  border-radius: 12px;
-  border: 2px solid #f0f0f0;
-  transition: all 0.3s ease;
-  font-size: 14px;
-  height: 48px;
-
-  @media (max-width: 768px) {
-    height: 44px;
-    font-size: 13px;
-  }
-
-  &:hover {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
-  }
-
-  &:focus,
-  &.ant-input-focused {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
-  }
-
-  &::placeholder {
-    color: #bfbfbf;
-  }
-}
-
-.modernAntdSelect {
-  .ant-select-selector {
-    border-radius: 12px !important;
-    border: 2px solid #f0f0f0 !important;
-    transition: all 0.3s ease !important;
+  // Normalize all inputs/selects inside the form
+  .ant-input {
+    border-radius: 12px;
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
     font-size: 14px;
-    height: 48px !important;
-    display: flex;
-    align-items: center;
+    height: 48px;
 
-    @media (max-width: 768px) {
-      height: 44px !important;
-      font-size: 13px;
+    &:hover {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
+    }
+
+    &:focus,
+    &.ant-input-focused {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
+    }
+
+    &::placeholder {
+      color: #bfbfbf;
     }
   }
 
-  &:hover .ant-select-selector {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
-  }
+  .ant-select {
+    .ant-select-selector {
+      border-radius: 12px !important;
+      border: 2px solid #f0f0f0 !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px;
+      height: 48px !important;
+      display: flex;
+      align-items: center;
+    }
 
-  &.ant-select-focused .ant-select-selector {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1) !important;
+    &:hover .ant-select-selector {
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1);
+    }
+
+    &.ant-select-focused .ant-select-selector {
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 3px rgba(44, 44, 233, 0.1) !important;
+    }
   }
 }
+
+
 
 .modernSectionDivider {
   margin: 32px 0 24px 0;
@@ -2886,7 +2851,7 @@
   font-size: 16px;
   font-weight: 600;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%) !important;
+  background: linear-gradient(135deg, var(--primary) 0%, #1c1fcd 100%) !important;
   border: none !important;
   box-shadow: 0 4px 16px rgba(44, 44, 233, 0.3) !important;
 
@@ -2996,17 +2961,9 @@
 
 // Enhanced mobile responsiveness for form elements
 @media (max-width: 768px) {
-  .modernFormContainer {
-    margin: 0;
-  }
-
   .modernFormCard {
     border-radius: 12px;
     margin: 0;
-  }
-
-  .modernFormHeader {
-    padding: 0 16px;
   }
 
   .modernAntdForm {
@@ -3033,7 +2990,7 @@
   }
 
   .modernAntdSelect .ant-select-selector {
-    height: 40px !important;
+    height: 40px;
     font-size: 12px;
   }
 

@@ -20,7 +20,7 @@ export default function HeroSection() {
       <section className={styles.hero} aria-labelledby="hero-title">
         <div>
           <div className={styles.content}>
-            <h1 id="hero-title">Payroll, Simplified</h1>
+            <h1 id="hero-title" style={{ color: '#2b28b8' }}>Payroll, Simplified</h1>
             <h2 style={{ color: '#F05A00', marginBottom: '1.5rem' }}>The EZII Way</h2>
             <p className={styles.description}>
               Backed by 20+ years of experience, EZII helps you get it right—payroll, leave management, or attendance—without hassle.

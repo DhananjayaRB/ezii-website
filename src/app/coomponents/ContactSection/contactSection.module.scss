@@ -1,23 +1,30 @@
 .contactSection {
   width: 100%;
-  padding: 25px 8% 3rem 8%;
-  // background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 50%, #e8f0ff 100%);
+  max-width: 1300px;
+  padding: 2rem;
   position: relative;
   margin: 0 auto;
-  // max-width: 1400px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: fit-content;
 
   @media (max-width: 1100px) {
-    padding: 5rem 6% 3rem 6%;
+    padding: 2rem 1.5rem;
+    max-width: 95%;
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 5% 2rem 5%;
+    padding: 1.5rem 1rem;
     max-width: 100%;
+    width: 95%;
   }
 
   @media (max-width: 480px) {
-    padding: 2rem 4% 1.5rem 4%;
+    padding: 1rem 0.5rem;
+    width: 100%;
   }
 }
 
@@ -25,8 +32,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: start;
-  max-width: 1300px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -39,19 +47,36 @@
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 2rem;
+    align-items: center;
+    justify-items: center;
   }
 }
 
 .contactFlex {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
   width: 100%;
-  // max-width: 1300px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4rem;
+
+  @media (max-width: 1024px) {
+    gap: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    // flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.contactInfo,
+.contactForm {
+  flex: 1 1 0;
+  min-width: 100%;
 }
 
 /* Left Section - Contact Information */
@@ -413,5 +438,50 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+// Perfect centering for all viewport sizes
+@media (min-width: 1200px) {
+  .contactSection {
+    max-width: 1200px;
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .contactSection {
+    max-width: 1300px;
+    padding: 3.5rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .contactSection {
+    max-width: 1400px;
+    padding: 4rem;
+  }
+}
+
+// Ensure form stays centered on very small screens
+@media (max-width: 360px) {
+  .contactSection {
+    padding: 0.75rem 0.25rem;
+    width: 100%;
+  }
+  
+  .contactGrid {
+    gap: 1.5rem;
+  }
+}
+
+// Landscape orientation adjustments
+@media (max-height: 600px) and (orientation: landscape) {
+  .contactSection {
+    padding: 1rem;
+  }
+  
+  .contactGrid {
+    gap: 2rem;
   }
 }

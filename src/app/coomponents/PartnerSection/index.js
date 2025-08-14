@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './partnerSection.module.scss';
 import { partnerData } from '@/app/constants';
+import Button from '../Button';
 
 export default function PartnerSection() {
   const handlePartnerClick = () => {
@@ -28,12 +29,14 @@ export default function PartnerSection() {
               </div>
               <h3 className={styles.partnerTitle}>{partner.title}</h3>
               <p className={styles.partnerDescription}>{partner.description}</p>
-              <button
-                className={styles.partnerButton}
+              <Button
                 onClick={handlePartnerClick}
+                variant="primary"
+                size="small"
+                className={styles.partnerButton}
               >
                 {partner.buttonText}
-              </button>
+              </Button>
             </div>
           ))}
         </div>

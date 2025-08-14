@@ -2,7 +2,6 @@ import Navbar from '@/app/coomponents/Navbar';
 import Footer from '@/app/coomponents/Footer';
 import styles from './contact.module.scss';
 import ContactForm from '../coomponents/ContactForm';
-import HeaderWithImage from '@/app/coomponents/HeaderWithImage';
 
 // Page-specific metadata for SEO
 export const metadata = {
@@ -36,15 +35,6 @@ export default function ContactPage() {
       <Navbar />
       <div className={styles.backgroundImage}></div>
       <main className={styles.main}>
-        {/* <div className={styles.heroSection}>
-          <HeaderWithImage
-            imageSrc="/assets/contact/pricing-1.webp"
-            imageAlt="Contact Us"
-            title="Contact Us"
-            description="Leave the hassle of payroll to us – We help you get it right"
-            applyPurpleHue
-          />
-        </div> */}
         <ContactForm />
       </main>
       <Footer />
